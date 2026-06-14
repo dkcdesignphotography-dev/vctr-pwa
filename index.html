@@ -125,6 +125,17 @@ input[type=password],input[type=text],input[type=url],input[type=email]{width:10
 .howto-tagline{text-align:center;padding:20px 0 8px;}
 .howto-tagline p{font-size:22px;font-weight:800;line-height:1.5;color:var(--text);}
 .howto-tagline p span{color:var(--c);}
+/* History */
+.hist-section{margin-top:4px;}
+.hist-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--dim);letter-spacing:2px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;}
+.hist-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:11px;background:rgba(255,255,255,.03);border:1px solid var(--border);margin-bottom:7px;cursor:pointer;transition:all .15s;}
+.hist-item:hover{background:rgba(255,255,255,.06);}
+.hist-badge{width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;}
+.hist-text{flex:1;min-width:0;}
+.hist-name{font-size:10px;font-weight:600;margin-bottom:2px;}
+.hist-prompt{font-size:10px;font-weight:300;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.hist-time{font-size:8px;font-weight:300;color:var(--dim);flex-shrink:0;font-family:'JetBrains Mono',monospace;}
+.hist-reopen{font-size:10px;color:var(--dim);flex-shrink:0;padding:4px 6px;background:none;border:none;}
 /* Splash */
 #splash{background:var(--bg);flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;}
 .sp-arrow{font-size:72px;color:var(--c);text-shadow:0 0 40px #00E5FF66;transition:all .5s ease;opacity:0;transform:translateY(12px);}
@@ -243,6 +254,15 @@ input[type=password],input[type=text],input[type=url],input[type=email]{width:10
       <div class="mlbl" id="mlbl"></div>
       <div id="multi-items"></div>
       <button class="btn-reset" onclick="resetAll()">↩ route something else</button>
+    </div>
+
+    <!-- History / Home base -->
+    <div class="hist-section" id="hist-section" style="display:none;">
+      <div class="hist-lbl">
+        <span id="hist-count">RECENT ROUTES</span>
+        <button onclick="clearHistory()" style="background:none;border:none;color:rgba(255,100,100,.35);font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:1px;cursor:pointer;">CLEAR</button>
+      </div>
+      <div id="hist-items"></div>
     </div>
   </div>
   <div id="strip"></div>
@@ -550,13 +570,14 @@ function showResult(item){
 function showMulti(data){
   setPhase('multi');document.getElementById('mlbl').textContent=`${data.items.length} ITEMS — TAP TO OPEN EACH`;
   const c=document.getElementById('multi-items');c.innerHTML='';
-  data.items.forEach(item=>{const pl=P(item.destination);if(!pl)return;const b=document.createElement('button');b.className='mitem';b.style.cssText=`border-color:${pl.color}22;`;b.innerHTML=`<div class="mico" style="background:${pl.color}18;border:1px solid ${pl.color}33;color:${pl.color};">${pl.name[0]}</div><div style="flex:1;min-width:0;"><div class="mname" style="color:${pl.color};">${pl.name}</div><div class="mexc">${item.excerpt}</div></div><span style="color:${pl.color}55;font-size:16px;">→</span>`;b.onclick=()=>{window.open(pl.url(item.refined),'_blank');navigator.clipboard?.writeText(item.refined).catch(()=>{});};c.appendChild(b);});
+  data.items.forEach(item=>{const pl=P(item.destination);if(!pl)return;const b=document.createElement('button');b.className='mitem';b.style.cssText=`border-color:${pl.color}22;`;b.innerHTML=`<div class="mico" style="background:${pl.color}18;border:1px solid ${pl.color}33;color:${pl.color};">${pl.name[0]}</div><div style="flex:1;min-width:0;"><div class="mname" style="color:${pl.color};">${pl.name}</div><div class="mexc">${item.excerpt}</div></div><span style="color:${pl.color}55;font-size:16px;">→</span>`;b.onclick=()=>{window.open(pl.url(item.refined),'_blank');navigator.clipboard?.writeText(item.refined).catch(()=>{});saveToHistory(pl.id,item.refined);};c.appendChild(b);});
 }
-function openPlatform(){if(!lastResult||lastResult.type!=='route')return;const pl=P(lastResult.destination);if(!pl)return;window.open(pl.url(lastResult.refined),'_blank');navigator.clipboard?.writeText(lastResult.refined).catch(()=>{});}
+function openPlatform(){if(!lastResult||lastResult.type!=='route')return;const pl=P(lastResult.destination);if(!pl)return;window.open(pl.url(lastResult.refined),'_blank');navigator.clipboard?.writeText(lastResult.refined).catch(()=>{});saveToHistory(pl.id,lastResult.refined);}
 function copyPrompt(){if(!lastResult||lastResult.type!=='route')return;navigator.clipboard?.writeText(lastResult.refined).catch(()=>{});const b=document.querySelector('.btn-copy');b.textContent='✓';setTimeout(()=>b.textContent='Copy',2000);}
 function rerouteTo(pid){
   if(!lastResult)return;const pl=P(pid);if(!pl)return;const text=lastResult.refined||lastInput;
   window.open(pl.url(text),'_blank');navigator.clipboard?.writeText(text).catch(()=>{});
+  saveToHistory(pl.id,text);
   if(cfg.learningEnabled){const kws=keywords(text);if(kws.length){const lr=cfg.learnedRoutes||{};lr[pid]=[...new Set([...(lr[pid]||[]),...kws])];cfg.learnedRoutes=lr;saveCfg();showLearnedToast(kws.slice(0,3),pl.name);}}
   hideReroute();
 }
@@ -617,7 +638,7 @@ function delLearned(pid){delete cfg.learnedRoutes[pid];saveCfg();initSettings();
 function initMain(){
   document.getElementById('mode-badge').textContent=cfg.useOffline?'⚡ OFFLINE':(cfg.apiKey?'🟢 ONLINE':'🟡 OFFLINE');
   const strip=document.getElementById('strip');strip.innerHTML='';
-  PLATS.filter(p=>cfg.platforms.includes(p.id)).forEach(p=>{const d=document.createElement('div');d.className='pip';d.innerHTML=`<div class="pip-dot" style="background:${p.color};box-shadow:0 0 4px ${p.color}88;"></div><span class="pip-name">${p.name.toUpperCase()}</span>`;strip.appendChild(d);});
+  PLATS.filter(p=>cfg.platforms.includes(p.id)).forEach(p=>{const d=document.createElement('button');d.className='pip';d.title=`Open ${p.name}`;d.style.cssText='background:none;border:none;cursor:pointer;touch-action:manipulation;padding:2px 0;';d.innerHTML=`<div class="pip-dot" style="background:${p.color};box-shadow:0 0 4px ${p.color}88;"></div><span class="pip-name">${p.name.toUpperCase()}</span>`;d.onclick=()=>window.open(p.url(''),p.id);strip.appendChild(d);});
   setMode('voice');
 }
 function showScreen(name){
@@ -626,8 +647,75 @@ function showScreen(name){
   const el=document.getElementById('screen-'+name);
   el.classList.add('on');el.style.display='flex';
   if(name==='settings')initSettings();
+  if(name==='main')renderHistory();
 }
 function goBack(){showScreen(prevScreen||'main');}
+// ── History / Home base ───────────────────────────────────────────────────
+function saveToHistory(destination, prompt) {
+  const history = getHistory();
+  const entry = { id: Date.now(), destination, prompt, ts: Date.now() };
+  history.unshift(entry);
+  const trimmed = history.slice(0, 10); // keep last 10
+  try { localStorage.setItem('vctr_history', JSON.stringify(trimmed)); } catch(e) {}
+  renderHistory();
+}
+
+function getHistory() {
+  try { const s = localStorage.getItem('vctr_history'); return s ? JSON.parse(s) : []; } catch(e) { return []; }
+}
+
+function clearHistory() {
+  try { localStorage.removeItem('vctr_history'); } catch(e) {}
+  renderHistory();
+}
+
+function timeAgo(ts) {
+  const s = Math.floor((Date.now() - ts) / 1000);
+  if (s < 60) return 'just now';
+  if (s < 3600) return `${Math.floor(s/60)}m ago`;
+  if (s < 86400) return `${Math.floor(s/3600)}h ago`;
+  return `${Math.floor(s/86400)}d ago`;
+}
+
+function renderHistory() {
+  const history = getHistory();
+  const section = document.getElementById('hist-section');
+  const container = document.getElementById('hist-items');
+  const countEl = document.getElementById('hist-count');
+  if (!history.length) { section.style.display = 'none'; return; }
+  section.style.display = 'block';
+  countEl.textContent = `${history.length} RECENT ROUTE${history.length !== 1 ? 'S' : ''}`;
+  container.innerHTML = '';
+  history.forEach(entry => {
+    const pl = P(entry.destination);
+    if (!pl) return;
+    const div = document.createElement('div');
+    div.className = 'hist-item';
+    div.innerHTML = `
+      <div class="hist-badge" style="background:${pl.color}18;border:1px solid ${pl.color}33;color:${pl.color};">${pl.name[0]}</div>
+      <div class="hist-text">
+        <div class="hist-name" style="color:${pl.color};">${pl.name}</div>
+        <div class="hist-prompt">${entry.prompt.length > 50 ? entry.prompt.slice(0,50)+'…' : entry.prompt}</div>
+      </div>
+      <div class="hist-time">${timeAgo(entry.ts)}</div>
+      <button class="hist-reopen" title="Open again">↗</button>
+    `;
+    // Tap anywhere → route same prompt again
+    div.querySelector('.hist-reopen').onclick = (e) => {
+      e.stopPropagation();
+      window.open(pl.url(entry.prompt), '_blank');
+      navigator.clipboard?.writeText(entry.prompt).catch(()=>{});
+    };
+    div.onclick = () => {
+      // Re-route the prompt through VCTR again
+      const textarea = document.getElementById('input');
+      if (textarea) { textarea.value = entry.prompt; setMode('keyboard'); }
+      route(entry.prompt);
+    };
+    container.appendChild(div);
+  });
+}
+
 window.addEventListener('DOMContentLoaded',()=>{
   loadCfg();
   setTimeout(()=>document.getElementById('sp-arr').classList.add('on'),200);
@@ -635,6 +723,7 @@ window.addEventListener('DOMContentLoaded',()=>{
   setTimeout(()=>document.getElementById('sp-tag').classList.add('on'),1400);
   setTimeout(()=>{if(cfg.apiKey||cfg.useOffline){initMain();showScreen('main');}else showScreen('setup');},2500);
   setupState.useOffline=cfg.useOffline;setupState.learningEnabled=cfg.learningEnabled;setupState.smartConsent=cfg.smartConsent||false;
+  renderHistory();
   document.getElementById('offline-chk').classList.toggle('on',cfg.useOffline);document.getElementById('offline-chk').textContent=cfg.useOffline?'✓':'';
   document.getElementById('learn-chk').classList.toggle('on',cfg.learningEnabled);document.getElementById('learn-chk').textContent=cfg.learningEnabled?'✓':'';
 });
