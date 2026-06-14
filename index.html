@@ -111,7 +111,7 @@ input[type=password],input[type=text],input[type=url],input[type=email]{width:10
 .legal-body h2{font-size:20px;font-weight:800;color:var(--text);margin-bottom:4px;letter-spacing:-0.3px;}
 .legal-body .eff{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--dim);margin-bottom:20px;letter-spacing:1px;}
 .legal-body h3{font-size:13px;font-weight:700;color:var(--c);margin:18px 0 6px;letter-spacing:0.5px;}
-.legal-body p,.legal-body li{font-size:13px;color:rgba(255,255,255,.55);line-height:1.8;margin-bottom:6px;font-weight:300;}
+.legal-body p,.legal-body li{font-size:14px;color:rgba(255,255,255,.55);line-height:1.8;margin-bottom:8px;font-weight:400;}
 .legal-body ul{padding-left:18px;}
 .legal-body li{margin-bottom:3px;}
 /* How To */
@@ -251,63 +251,96 @@ input[type=password],input[type=text],input[type=url],input[type=email]{width:10
 <!-- HOW TO USE -->
 <div id="screen-howto" class="screen">
   <div class="hdr"><div class="logo"><span class="arrow">→</span><span class="wordmark">VCTR</span></div><button class="icon-btn" id="howto-back" onclick="goBack()">← Back</button></div>
-  <div class="legal-body">
-    <h2>How to Use VCTR</h2>
-    <p class="eff" style="font-size:13px;color:var(--muted);margin-bottom:20px;">VCTR gets your task to the right AI faster.<br/>No tool hopping. No second-guessing. No staring at five tabs wondering where to start.</p>
+  <div style="flex:1;overflow-y:auto;padding:24px 20px 40px;">
 
-    <div class="howto-step">
-      <div class="howto-num">STEP 01</div>
-      <div class="howto-title">Build Your Stack</div>
-      <div class="howto-body">Choose the AI tools you actually use. Set it once. Route faster every time.<ul class="howto-examples"><li>ChatGPT</li><li>Claude</li><li>Perplexity</li><li>Gemini</li><li>Custom tools</li></ul></div>
+    <div style="margin-bottom:28px;">
+      <div style="font-size:22px;font-weight:800;color:var(--text);margin-bottom:8px;">How to use VCTR.</div>
+      <div style="font-size:14px;font-weight:400;color:var(--muted);line-height:1.7;">Get your task to the right AI faster. No tool hopping. No second-guessing.</div>
     </div>
 
-    <div class="howto-step">
-      <div class="howto-num">STEP 02</div>
-      <div class="howto-title">Choose Your Routing Mode</div>
-      <div class="howto-body">
-        <em>⚡ Offline Routing</em> — Fast, simple, on-device keyword matching. No API key needed.<br/><br/>
-        <em>🧠 Smart Routing</em> — Sharper recommendations using your Anthropic API key.<br/><br/>
-        Use offline when you want quick and private. Use Smart Routing when you want VCTR to think harder.
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:32px;">
+
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:20px 18px;">
+        <div style="display:flex;align-items:flex-start;gap:14px;">
+          <div style="font-size:28px;font-weight:800;color:rgba(0,229,255,.2);flex-shrink:0;line-height:1;">01</div>
+          <div>
+            <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px;">Build your stack.</div>
+            <div style="font-size:13px;font-weight:400;color:var(--muted);line-height:1.7;">Choose the AI tools you actually use — Claude, ChatGPT, Perplexity, Gemini, or your own. Set it once. Route faster every time.</div>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="howto-step">
-      <div class="howto-num">STEP 03</div>
-      <div class="howto-title">Drop the Task</div>
-      <div class="howto-body">Type it or say it. Do not overbuild the prompt. Just get the task out of your head.<ul class="howto-examples"><li>"Research competitors for a new service."</li><li>"Write a LinkedIn post from these notes."</li><li>"Turn this idea into an image prompt."</li><li>"Help me clean up this email."</li><li>"Summarize this topic before a meeting."</li></ul></div>
-    </div>
-
-    <div class="howto-step">
-      <div class="howto-num">STEP 04</div>
-      <div class="howto-title">Route It</div>
-      <div class="howto-body">Tap <em>Route Prompt</em>. VCTR reviews the task and recommends the best place to start.<br/><br/>Research? Maybe Perplexity. Writing? Maybe ChatGPT or Claude. Visual concept? Maybe an image tool.<br/><br/>One task. One direction.</div>
-    </div>
-
-    <div class="howto-step">
-      <div class="howto-num">STEP 05</div>
-      <div class="howto-title">Open or Copy</div>
-      <div class="howto-body">
-        <em>Open Destination</em> — Go straight to the recommended tool.<br/><br/>
-        <em>Copy Prompt</em> — Copy the cleaned-up prompt and paste it wherever you want.<br/><br/>
-        VCTR does not replace the AI tool. It gets you to the right one faster.
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:20px 18px;">
+        <div style="display:flex;align-items:flex-start;gap:14px;">
+          <div style="font-size:28px;font-weight:800;color:rgba(0,229,255,.2);flex-shrink:0;line-height:1;">02</div>
+          <div>
+            <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px;">Pick a routing mode.</div>
+            <div style="font-size:13px;font-weight:400;color:var(--muted);line-height:1.7;"><span style="color:var(--text);font-weight:600;">⚡ Offline</span> — keyword matching, no API key, always private.<br/><span style="color:var(--text);font-weight:600;">🧠 Smart</span> — sharper results using your Anthropic key.</div>
+          </div>
+        </div>
       </div>
+
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:20px 18px;">
+        <div style="display:flex;align-items:flex-start;gap:14px;">
+          <div style="font-size:28px;font-weight:800;color:rgba(0,229,255,.2);flex-shrink:0;line-height:1;">03</div>
+          <div>
+            <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px;">Drop the task.</div>
+            <div style="font-size:13px;font-weight:400;color:var(--muted);line-height:1.7;">Type it or say it. Don't overthink it — just get the idea out of your head. VCTR handles the rest.</div>
+            <div style="margin-top:10px;display:flex;flex-direction:column;gap:5px;">
+              <div style="font-size:11px;font-weight:400;color:rgba(255,255,255,.3);border-left:2px solid rgba(0,229,255,.25);padding-left:10px;line-height:1.5;">"Research competitors for a new service."</div>
+              <div style="font-size:11px;font-weight:400;color:rgba(255,255,255,.3);border-left:2px solid rgba(0,229,255,.25);padding-left:10px;line-height:1.5;">"Write a LinkedIn post from these notes."</div>
+              <div style="font-size:11px;font-weight:400;color:rgba(255,255,255,.3);border-left:2px solid rgba(0,229,255,.25);padding-left:10px;line-height:1.5;">"Help me clean up this email."</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:20px 18px;">
+        <div style="display:flex;align-items:flex-start;gap:14px;">
+          <div style="font-size:28px;font-weight:800;color:rgba(0,229,255,.2);flex-shrink:0;line-height:1;">04</div>
+          <div>
+            <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px;">Route it.</div>
+            <div style="font-size:13px;font-weight:400;color:var(--muted);line-height:1.7;">Tap <span style="color:var(--c);font-weight:600;">Route →</span>. VCTR picks the right tool. One task. One direction.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:20px 18px;">
+        <div style="display:flex;align-items:flex-start;gap:14px;">
+          <div style="font-size:28px;font-weight:800;color:rgba(0,229,255,.2);flex-shrink:0;line-height:1;">05</div>
+          <div>
+            <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px;">Open or copy.</div>
+            <div style="font-size:13px;font-weight:400;color:var(--muted);line-height:1.7;"><span style="color:var(--text);font-weight:600;">Open</span> — go straight to the tool.<br/><span style="color:var(--text);font-weight:600;">Copy</span> — grab the cleaned-up prompt and paste it anywhere.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:20px 18px;">
+        <div style="display:flex;align-items:flex-start;gap:14px;">
+          <div style="font-size:28px;font-weight:800;color:rgba(0,229,255,.2);flex-shrink:0;line-height:1;">06</div>
+          <div>
+            <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px;">Correct the route.</div>
+            <div style="font-size:13px;font-weight:400;color:var(--muted);line-height:1.7;">Wrong fit? Tap <span style="color:var(--c);font-weight:600;">Choose a Different AI</span>. VCTR learns from the correction and gets sharper over time.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:20px 18px;">
+        <div style="display:flex;align-items:flex-start;gap:14px;">
+          <div style="font-size:28px;font-weight:800;color:rgba(0,229,255,.2);flex-shrink:0;line-height:1;">07</div>
+          <div>
+            <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px;">Manage your stack.</div>
+            <div style="font-size:13px;font-weight:400;color:var(--muted);line-height:1.7;">Use <span style="color:var(--c);">⚙ Settings</span> to update your tools, switch modes, clear learned routes, or review privacy and terms.</div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <div class="howto-step">
-      <div class="howto-num">STEP 06</div>
-      <div class="howto-title">Correct the Route</div>
-      <div class="howto-body">Wrong fit? Tap <em>Choose a Different AI</em>. VCTR can learn from that correction locally on your device, so the next route gets sharper.<br/><br/>You stay in control. VCTR gets faster with you.</div>
+    <div style="text-align:center;padding:8px 0 16px;">
+      <div style="font-size:26px;font-weight:800;line-height:1.6;color:var(--text);">Think it.<br/>Say it.<br/>Route it.<br/><span style="color:var(--c);">Move.</span></div>
     </div>
 
-    <div class="howto-step">
-      <div class="howto-num">STEP 07</div>
-      <div class="howto-title">Manage Your Control Center</div>
-      <div class="howto-body">Use <em>Settings</em> to update your AI stack, switch routing modes, clear learned routes, clear your API key, reset VCTR, and view privacy and terms.</div>
-    </div>
-
-    <div class="howto-tagline">
-      <p><span>Think it.</span><br/><span>Say it.</span><br/><span>Route it.</span><br/><span style="color:var(--c);">Move.</span></p>
-    </div>
   </div>
 </div>
 
