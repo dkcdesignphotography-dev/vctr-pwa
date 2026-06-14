@@ -14,24 +14,20 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Syne',
 #app{position:fixed;inset:0;display:flex;flex-direction:column;}
 button{font-family:inherit;cursor:pointer;touch-action:manipulation;}
 button:active{opacity:.82;}
-::-webkit-scrollbar{display:none;}
+::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-thumb{background:#111820;border-radius:3px;}
 .screen{display:none;flex-direction:column;flex:1;overflow:hidden;}
 .screen.on{display:flex;}
-/* Header */
 .hdr{display:flex;align-items:center;justify-content:space-between;padding:max(env(safe-area-inset-top),14px) 18px 13px;border-bottom:1px solid var(--border);flex-shrink:0;}
 .logo{display:flex;align-items:center;gap:9px;}
 .arrow{font-size:22px;color:var(--c);filter:drop-shadow(0 0 8px #00E5FF66);}
 .wordmark{font-family:'JetBrains Mono',monospace;font-size:17px;font-weight:800;color:var(--c);letter-spacing:3px;}
 .badge{font-family:'JetBrains Mono',monospace;font-size:9px;color:#F59E0B;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:20px;padding:3px 10px;letter-spacing:1px;}
-.hdr-right{display:flex;gap:8px;align-items:center;}
+.hdr-right{display:flex;gap:7px;align-items:center;}
 .icon-btn{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:9px;padding:7px 11px;color:var(--muted);font-size:14px;}
-/* Mode toggle */
 .toggle{display:flex;gap:3px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:12px;padding:3px;margin:13px 16px 0;flex-shrink:0;}
 .tab{flex:1;border-radius:9px;padding:10px 8px;border:1px solid transparent;font-size:13px;font-weight:600;color:var(--muted);background:transparent;}
 .tab.on{background:rgba(255,255,255,.09);border-color:rgba(0,229,255,.22);color:var(--text);}
-/* Body */
 .body{flex:1;overflow-y:auto;padding:15px 16px 10px;display:flex;flex-direction:column;gap:13px;}
-/* Voice */
 #voice-sec{display:flex;flex-direction:column;align-items:center;gap:13px;padding-top:6px;}
 .vstatus{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--dim);text-transform:uppercase;transition:color .3s;}
 .vstatus.rec{color:#ef4444;}
@@ -41,32 +37,26 @@ button:active{opacity:.82;}
 .captured{display:none;background:rgba(255,255,255,.04);border:1px solid rgba(0,229,255,.18);border-radius:11px;padding:10px 13px;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(240,238,232,.6);line-height:1.5;width:100%;}
 .auto-row{display:flex;align-items:center;gap:9px;}
 .tog-track{width:34px;height:18px;border-radius:9px;position:relative;border:none;transition:background .2s;cursor:pointer;}
-.tog-track.on{background:var(--c);}
-.tog-track:not(.on){background:rgba(255,255,255,.1);}
+.tog-track.on{background:var(--c);}.tog-track:not(.on){background:rgba(255,255,255,.1);}
 .tog-thumb{position:absolute;width:12px;height:12px;border-radius:50%;background:var(--bg);top:3px;transition:left .15s ease;}
-.tog-track.on .tog-thumb{left:19px;}
-.tog-track:not(.on) .tog-thumb{left:3px;}
+.tog-track.on .tog-thumb{left:19px;}.tog-track:not(.on) .tog-thumb{left:3px;}
 .tog-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--dim);letter-spacing:1px;}
 .route-now{display:none;background:linear-gradient(135deg,var(--c),#0070FF);border:none;border-radius:12px;padding:12px 24px;color:#05080F;font-family:'Syne',sans-serif;font-size:14px;font-weight:800;letter-spacing:.5px;box-shadow:0 4px 18px rgba(0,229,255,.25);}
-/* Keyboard */
 #kb-sec{display:none;flex-direction:column;gap:9px;}
 .ta-wrap{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:13px;overflow:hidden;}
 textarea{width:100%;background:transparent;border:none;color:var(--text);font-size:14px;line-height:1.7;padding:13px 14px;resize:none;min-height:120px;font-family:'Syne',sans-serif;outline:none;}
 textarea::placeholder{color:var(--dim);font-size:13px;}
 .ta-foot{padding:8px 12px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;}
 .btn-route{background:linear-gradient(135deg,var(--c),#0070FF);border:none;border-radius:9px;padding:9px 18px;color:#05080F;font-weight:800;font-size:12px;letter-spacing:.5px;box-shadow:0 3px 12px rgba(0,229,255,.22);}
-/* Loading */
 #loading{display:none;justify-content:center;gap:5px;padding:14px 0;}
 #loading span{width:7px;height:7px;border-radius:50%;background:var(--c);}
 #loading span:nth-child(1){animation:db 1.2s ease 0s infinite;}
 #loading span:nth-child(2){animation:db 1.2s ease .18s infinite;}
 #loading span:nth-child(3){animation:db 1.2s ease .36s infinite;}
 @keyframes db{0%,80%,100%{transform:translateY(0);}40%{transform:translateY(-7px);}}
-/* Result */
 #result{display:none;flex-direction:column;gap:8px;animation:su .3s ease;}
 .rcard{border-radius:14px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.4);}
-.rbar{height:2px;}
-.rinner{padding:13px 15px;}
+.rbar{height:2px;}.rinner{padding:13px 15px;}
 .rplatrow{display:flex;align-items:center;gap:10px;margin-bottom:9px;}
 .rbadge{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex-shrink:0;}
 .rname{font-size:17px;font-weight:800;line-height:1;}
@@ -75,35 +65,31 @@ textarea::placeholder{color:var(--dim);font-size:13px;}
 .ractions{display:flex;gap:8px;}
 .btn-open{flex:1;border:none;border-radius:9px;padding:11px;font-weight:800;font-size:12px;letter-spacing:.5px;}
 .btn-copy{background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:9px;padding:11px 14px;color:var(--muted);font-size:12px;font-weight:600;}
-/* Multi */
 #multi{display:none;flex-direction:column;gap:7px;animation:su .3s ease;}
 .mlbl{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--muted);letter-spacing:2px;text-align:center;margin-bottom:4px;}
-.mitem{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.03);border-radius:12px;padding:11px 13px;text-align:left;border-width:1px;border-style:solid;}
+.mitem{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.03);border-radius:12px;padding:11px 13px;text-align:left;border-width:1px;border-style:solid;width:100%;}
 .mico{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;}
 .mname{font-size:12px;font-weight:700;margin-bottom:2px;}
 .mexc{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:220px;}
-/* Reroute */
 #reroute{display:none;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:13px;padding:12px 10px;flex-direction:column;gap:9px;}
 .rre-lbl{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--dim);letter-spacing:2px;text-align:center;}
 .rre-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;}
 .rre-btn{display:flex;flex-direction:column;align-items:center;gap:5px;border-radius:11px;padding:9px 6px;border-width:1px;border-style:solid;}
 .rre-ico{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;}
 .rre-name{font-size:9px;font-weight:600;text-align:center;line-height:1.2;}
-/* Not right btn */
 .btn-notright{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:11px;padding:11px;color:rgba(255,255,255,.45);font-size:12px;font-weight:600;}
-/* Reset */
 .btn-reset{width:100%;background:none;border:none;color:var(--dim);font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1px;padding:8px 0;}
-/* Platform strip */
 #strip{display:flex;flex-wrap:wrap;gap:7px;padding:8px 16px max(env(safe-area-inset-bottom),10px);border-top:1px solid var(--border);background:rgba(5,8,15,.8);flex-shrink:0;}
 .pip{display:flex;align-items:center;gap:3px;}
 .pip-dot{width:4px;height:4px;border-radius:50%;}
 .pip-name{font-family:'JetBrains Mono',monospace;font-size:7px;color:var(--dim);letter-spacing:.5px;}
 /* Setup */
-.setup-body{flex:1;overflow-y:auto;padding:28px 22px;display:flex;flex-direction:column;gap:18px;}
+.setup-body{flex:1;overflow-y:auto;padding:24px 22px;display:flex;flex-direction:column;gap:16px;}
 .slbl{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--c);letter-spacing:2px;margin-bottom:6px;}
-.sdesc{font-size:11px;color:var(--muted);line-height:1.55;margin-bottom:8px;}
-input[type=password],input[type=text],input[type=url]{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:11px;padding:11px 13px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:12px;outline:none;}
-.hint{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--dim);margin-top:5px;}
+.sdesc{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:8px;}
+input[type=password],input[type=text],input[type=url],input[type=email]{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:11px;padding:11px 13px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:12px;outline:none;}
+.hint{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--dim);margin-top:5px;line-height:1.5;}
+.warn-box{background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.25);border-radius:11px;padding:11px 13px;font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(245,158,11,.8);line-height:1.6;}
 .chk-row{display:flex;align-items:flex-start;gap:12px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:13px;padding:13px 15px;cursor:pointer;}
 .chk-box{width:20px;height:20px;border-radius:6px;border:1.5px solid rgba(255,255,255,.25);background:transparent;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:#05080F;transition:all .15s;margin-top:1px;}
 .chk-box.on{background:var(--c);border-color:var(--c);}
@@ -112,10 +98,33 @@ input[type=password],input[type=text],input[type=url]{width:100%;background:rgba
 .btn-primary{width:100%;background:linear-gradient(135deg,var(--c),#0070FF);border:none;border-radius:13px;padding:14px;color:#05080F;font-family:'Syne',sans-serif;font-size:15px;font-weight:800;letter-spacing:.5px;box-shadow:0 4px 18px rgba(0,229,255,.25);}
 .err{font-family:'JetBrains Mono',monospace;font-size:10px;color:#ff6b6b;text-align:center;}
 /* Settings */
-.settings-body{flex:1;overflow-y:auto;padding:18px 20px 24px;display:flex;flex-direction:column;gap:18px;}
+.scroll-body{flex:1;overflow-y:auto;padding:18px 20px 24px;display:flex;flex-direction:column;gap:18px;}
 .sec-ttl{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--c);letter-spacing:2px;margin-bottom:8px;}
+.settings-link{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:11px;padding:12px 14px;font-size:13px;font-weight:600;color:var(--text);}
+.settings-link span{color:var(--muted);font-size:16px;}
 .learned-item{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:9px;padding:8px 11px;margin-bottom:5px;font-size:11px;}
 .btn-del{background:none;border:none;color:rgba(255,100,100,.45);font-size:18px;padding:0 3px;}
+.btn-danger{width:100%;background:rgba(255,60,60,.08);border:1px solid rgba(255,60,60,.2);border-radius:11px;padding:12px;color:rgba(255,120,120,.8);font-size:13px;font-weight:600;}
+.disclaimer-footer{font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(255,255,255,.2);line-height:1.6;text-align:center;padding:4px 0 8px;}
+/* Legal / How To screens */
+.legal-body{flex:1;overflow-y:auto;padding:20px 20px 32px;}
+.legal-body h2{font-size:20px;font-weight:800;color:var(--text);margin-bottom:4px;}
+.legal-body .eff{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--dim);margin-bottom:20px;letter-spacing:1px;}
+.legal-body h3{font-size:14px;font-weight:700;color:var(--c);margin:18px 0 6px;}
+.legal-body p,.legal-body li{font-size:13px;color:rgba(255,255,255,.55);line-height:1.7;margin-bottom:6px;}
+.legal-body ul{padding-left:18px;}
+.legal-body li{margin-bottom:3px;}
+/* How To */
+.howto-step{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:14px;padding:16px 16px;margin-bottom:12px;}
+.howto-num{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--c);letter-spacing:2px;margin-bottom:5px;}
+.howto-title{font-size:16px;font-weight:800;margin-bottom:8px;}
+.howto-body{font-size:13px;color:var(--muted);line-height:1.7;}
+.howto-body em{color:rgba(255,255,255,.65);font-style:normal;}
+.howto-examples{margin:8px 0 0 0;padding-left:16px;}
+.howto-examples li{font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,.4);margin-bottom:4px;line-height:1.5;}
+.howto-tagline{text-align:center;padding:20px 0 8px;}
+.howto-tagline p{font-size:22px;font-weight:800;line-height:1.5;color:var(--text);}
+.howto-tagline p span{color:var(--c);}
 /* Splash */
 #splash{background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;}
 .sp-arrow{font-size:72px;color:var(--c);text-shadow:0 0 40px #00E5FF66;transition:all .5s ease;opacity:0;transform:translateY(12px);}
@@ -124,7 +133,6 @@ input[type=password],input[type=text],input[type=url]{width:100%;background:rgba
 .sp-word.on{opacity:1;}
 .sp-tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--dim);transition:opacity .4s ease;opacity:0;}
 .sp-tag.on{opacity:1;}
-/* Animations */
 @keyframes su{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
 </style>
 </head>
@@ -142,28 +150,39 @@ input[type=password],input[type=text],input[type=url]{width:100%;background:rgba
 
 <!-- SETUP -->
 <div id="screen-setup" class="screen">
-  <div class="hdr"><div class="logo"><span class="arrow">→</span><span class="wordmark">VCTR</span></div><span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--dim);border:1px solid var(--border);border-radius:12px;padding:3px 10px;">FIRST RUN</span></div>
+  <div class="hdr"><div class="logo"><span class="arrow">→</span><span class="wordmark">VCTR</span></div><button class="icon-btn" onclick="showScreen('howto')">? How To</button></div>
   <div class="setup-body">
+    <div><div style="font-size:22px;font-weight:800;margin-bottom:8px;">Welcome to VCTR.</div><div style="font-size:14px;color:var(--muted);line-height:1.65;">Route anything to the right AI. Voice or text. Your stack, your rules.</div></div>
+
     <div>
-      <div style="font-size:22px;font-weight:800;margin-bottom:8px;">Welcome to VCTR.</div>
-      <div style="font-size:14px;color:var(--muted);line-height:1.65;">Route anything to the right AI. Voice or text. Your stack, your rules.</div>
+      <div class="slbl">ROUTING MODE</div>
+      <div id="offline-row" class="chk-row" onclick="toggleChk('offline-chk','useOffline')">
+        <div class="chk-box on" id="offline-chk">✓</div>
+        <div><div class="chk-lbl">⚡ Offline Routing</div><div class="chk-sub">Fast on-device keyword matching. No API key needed. Private.</div></div>
+      </div>
     </div>
+
     <div>
-      <div class="slbl">ANTHROPIC API KEY</div>
-      <div class="sdesc">For intelligent routing. Stays on your device — never shared.</div>
+      <div class="slbl">SMART ROUTING (OPTIONAL)</div>
+      <div class="sdesc">Sharper recommendations using your Anthropic API key. Your prompt may be sent to Anthropic for routing assistance.</div>
       <input type="password" id="api-key" placeholder="sk-ant-api03-..." autocomplete="off"/>
-      <div class="hint">Free at console.anthropic.com/keys</div>
+      <div class="hint">Free tier at console.anthropic.com/keys</div>
+      <div class="warn-box" style="margin-top:10px;">Your Anthropic API key is your credential. Treat it like a password. VCTR stores the key locally on this device so it can send Smart Routing requests directly to Anthropic. Do not save an API key on a shared or untrusted device.</div>
     </div>
-    <div id="offline-row" class="chk-row" onclick="toggleChk('offline-chk','useOffline')">
-      <div class="chk-box" id="offline-chk">✓</div>
-      <div><div class="chk-lbl">Use offline routing only</div><div class="chk-sub">Keyword matching — no API needed</div></div>
+
+    <div id="smart-consent-row" class="chk-row" onclick="toggleChk('smart-consent-chk','smartConsent')">
+      <div class="chk-box" id="smart-consent-chk"></div>
+      <div><div class="chk-lbl">I understand Smart Routing may send my prompt to Anthropic</div><div class="chk-sub">Required to enable Smart Routing. Offline Routing does not send prompts anywhere.</div></div>
     </div>
+
     <div id="learn-row" class="chk-row" onclick="toggleChk('learn-chk','learningEnabled')">
       <div class="chk-box on" id="learn-chk">✓</div>
       <div><div class="chk-lbl">🧠 Learn from my corrections</div><div class="chk-sub">Keywords from corrections saved locally on this device only — never sent anywhere.</div></div>
     </div>
+
     <div id="setup-err" class="err" style="display:none;"></div>
     <button class="btn-primary" onclick="finishSetup()">LAUNCH VCTR →</button>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(255,255,255,.2);text-align:center;line-height:1.6;">By using VCTR you agree to our <button onclick="showScreen('terms')" style="background:none;border:none;color:rgba(0,229,255,.5);font-family:inherit;font-size:inherit;text-decoration:underline;padding:0;">Terms of Use</button> and <button onclick="showScreen('privacy')" style="background:none;border:none;color:rgba(0,229,255,.5);font-family:inherit;font-size:inherit;text-decoration:underline;padding:0;">Privacy Policy</button>.</div>
   </div>
 </div>
 
@@ -173,6 +192,7 @@ input[type=password],input[type=text],input[type=url]{width:100%;background:rgba
     <div class="logo"><span class="arrow">→</span><span class="wordmark">VCTR</span></div>
     <div class="hdr-right">
       <div class="badge" id="mode-badge">⚡ OFFLINE</div>
+      <button class="icon-btn" onclick="showScreen('howto')" title="How To Use">?</button>
       <button class="icon-btn" onclick="showScreen('settings')">⚙</button>
     </div>
   </div>
@@ -181,7 +201,6 @@ input[type=password],input[type=text],input[type=url]{width:100%;background:rgba
     <button class="tab" id="tab-kb" onclick="setMode('keyboard')">⌨ Type</button>
   </div>
   <div class="body">
-    <!-- Voice -->
     <div id="voice-sec">
       <div class="vstatus" id="vstatus">TAP TO SPEAK</div>
       <button id="mic" onclick="toggleMic()">🎙</button>
@@ -193,27 +212,18 @@ input[type=password],input[type=text],input[type=url]{width:100%;background:rgba
       </div>
       <button class="route-now" id="route-now" onclick="routeNow()">ROUTE THIS →</button>
     </div>
-    <!-- Keyboard -->
     <div id="kb-sec">
       <div class="ta-wrap">
         <textarea id="input" rows="5" placeholder="Type anything — tasks, ideas, questions, events…&#10;&#10;Tip: start with a platform name to force it. 'Claude: …'"></textarea>
         <div class="ta-foot"><button class="btn-route" onclick="routeText()">ROUTE →</button></div>
       </div>
     </div>
-    <!-- Loading -->
     <div id="loading"><span></span><span></span><span></span></div>
-    <!-- Single result -->
     <div id="result">
       <div class="rcard" id="rcard">
         <div class="rbar" id="rbar"></div>
         <div class="rinner" id="rinner">
-          <div class="rplatrow">
-            <div class="rbadge" id="rbadge"></div>
-            <div>
-              <div id="rname" style="font-size:17px;font-weight:800;"></div>
-              <div id="rreason" class="rreason"></div>
-            </div>
-          </div>
+          <div class="rplatrow"><div class="rbadge" id="rbadge"></div><div><div id="rname" style="font-size:17px;font-weight:800;"></div><div id="rreason" class="rreason"></div></div></div>
           <div class="rprompt" id="rprompt"></div>
           <div class="ractions">
             <button class="btn-open" id="btn-open" onclick="openPlatform()">OPEN →</button>
@@ -221,7 +231,7 @@ input[type=password],input[type=text],input[type=url]{width:100%;background:rgba
           </div>
         </div>
       </div>
-      <button class="btn-notright" onclick="showReroute()">Not the right place? Send it somewhere else →</button>
+      <button class="btn-notright" onclick="showReroute()">Not the right place? Choose a Different AI →</button>
       <div id="reroute">
         <div class="rre-lbl">SEND TO A DIFFERENT AI</div>
         <div class="rre-grid" id="reroute-grid"></div>
@@ -229,7 +239,6 @@ input[type=password],input[type=text],input[type=url]{width:100%;background:rgba
       </div>
       <button class="btn-reset" onclick="resetAll()">↩ route something else</button>
     </div>
-    <!-- Multi result -->
     <div id="multi">
       <div class="mlbl" id="mlbl"></div>
       <div id="multi-items"></div>
@@ -239,390 +248,361 @@ input[type=password],input[type=text],input[type=url]{width:100%;background:rgba
   <div id="strip"></div>
 </div>
 
+<!-- HOW TO USE -->
+<div id="screen-howto" class="screen">
+  <div class="hdr"><div class="logo"><span class="arrow">→</span><span class="wordmark">VCTR</span></div><button class="icon-btn" id="howto-back" onclick="goBack()">← Back</button></div>
+  <div class="legal-body">
+    <h2>How to Use VCTR</h2>
+    <p class="eff" style="font-size:13px;color:var(--muted);margin-bottom:20px;">VCTR gets your task to the right AI faster.<br/>No tool hopping. No second-guessing. No staring at five tabs wondering where to start.</p>
+
+    <div class="howto-step">
+      <div class="howto-num">STEP 01</div>
+      <div class="howto-title">Build Your Stack</div>
+      <div class="howto-body">Choose the AI tools you actually use. Set it once. Route faster every time.<ul class="howto-examples"><li>ChatGPT</li><li>Claude</li><li>Perplexity</li><li>Gemini</li><li>Custom tools</li></ul></div>
+    </div>
+
+    <div class="howto-step">
+      <div class="howto-num">STEP 02</div>
+      <div class="howto-title">Choose Your Routing Mode</div>
+      <div class="howto-body">
+        <em>⚡ Offline Routing</em> — Fast, simple, on-device keyword matching. No API key needed.<br/><br/>
+        <em>🧠 Smart Routing</em> — Sharper recommendations using your Anthropic API key.<br/><br/>
+        Use offline when you want quick and private. Use Smart Routing when you want VCTR to think harder.
+      </div>
+    </div>
+
+    <div class="howto-step">
+      <div class="howto-num">STEP 03</div>
+      <div class="howto-title">Drop the Task</div>
+      <div class="howto-body">Type it or say it. Do not overbuild the prompt. Just get the task out of your head.<ul class="howto-examples"><li>"Research competitors for a new service."</li><li>"Write a LinkedIn post from these notes."</li><li>"Turn this idea into an image prompt."</li><li>"Help me clean up this email."</li><li>"Summarize this topic before a meeting."</li></ul></div>
+    </div>
+
+    <div class="howto-step">
+      <div class="howto-num">STEP 04</div>
+      <div class="howto-title">Route It</div>
+      <div class="howto-body">Tap <em>Route Prompt</em>. VCTR reviews the task and recommends the best place to start.<br/><br/>Research? Maybe Perplexity. Writing? Maybe ChatGPT or Claude. Visual concept? Maybe an image tool.<br/><br/>One task. One direction.</div>
+    </div>
+
+    <div class="howto-step">
+      <div class="howto-num">STEP 05</div>
+      <div class="howto-title">Open or Copy</div>
+      <div class="howto-body">
+        <em>Open Destination</em> — Go straight to the recommended tool.<br/><br/>
+        <em>Copy Prompt</em> — Copy the cleaned-up prompt and paste it wherever you want.<br/><br/>
+        VCTR does not replace the AI tool. It gets you to the right one faster.
+      </div>
+    </div>
+
+    <div class="howto-step">
+      <div class="howto-num">STEP 06</div>
+      <div class="howto-title">Correct the Route</div>
+      <div class="howto-body">Wrong fit? Tap <em>Choose a Different AI</em>. VCTR can learn from that correction locally on your device, so the next route gets sharper.<br/><br/>You stay in control. VCTR gets faster with you.</div>
+    </div>
+
+    <div class="howto-step">
+      <div class="howto-num">STEP 07</div>
+      <div class="howto-title">Manage Your Control Center</div>
+      <div class="howto-body">Use <em>Settings</em> to update your AI stack, switch routing modes, clear learned routes, clear your API key, reset VCTR, and view privacy and terms.</div>
+    </div>
+
+    <div class="howto-tagline">
+      <p><span>Think it.</span><br/><span>Say it.</span><br/><span>Route it.</span><br/><span style="color:var(--c);">Move.</span></p>
+    </div>
+  </div>
+</div>
+
 <!-- SETTINGS -->
 <div id="screen-settings" class="screen">
   <div class="hdr"><div class="logo"><span class="arrow">→</span><span class="wordmark">VCTR</span></div><button class="icon-btn" onclick="showScreen('main')">← Back</button></div>
-  <div class="settings-body">
+  <div class="scroll-body">
+
     <div>
-      <div class="sec-ttl">API KEY</div>
-      <input type="password" id="set-key" placeholder="sk-ant-api03-..."/>
+      <div class="sec-ttl">ROUTING MODE</div>
+      <div id="set-offline-row" class="chk-row" style="margin-bottom:0;" onclick="toggleChk('set-offline-chk','useOffline');saveSetting();">
+        <div class="chk-box" id="set-offline-chk">✓</div>
+        <div><div class="chk-lbl">⚡ Offline Routing</div><div class="chk-sub">On-device keyword matching. No API key needed.</div></div>
+      </div>
     </div>
+
+    <div>
+      <div class="sec-ttl">SMART ROUTING</div>
+      <input type="password" id="set-key" placeholder="sk-ant-api03-..." style="margin-bottom:8px;"/>
+      <div class="warn-box">Your API key is stored locally on this device only. Do not use on a shared device.</div>
+    </div>
+
     <div>
       <div class="sec-ttl">LEARNING</div>
       <div id="set-learn-row" class="chk-row" onclick="toggleChk('set-learn-chk','learningEnabled');saveSetting();">
         <div class="chk-box" id="set-learn-chk">✓</div>
-        <div><div class="chk-lbl">Learn from corrections</div><div class="chk-sub">Device only — never sent anywhere</div></div>
+        <div><div class="chk-lbl">🧠 Learn from corrections</div><div class="chk-sub">Device only — never sent anywhere.</div></div>
       </div>
       <div id="learned-section" style="margin-top:10px;"></div>
     </div>
+
+    <div>
+      <div class="sec-ttl">DATA CONTROLS</div>
+      <button class="btn-danger" style="margin-bottom:8px;" onclick="clearApiKey()">Clear API Key</button>
+      <button class="btn-danger" style="margin-bottom:8px;" onclick="clearLearnedRoutes()">Clear Learned Routes</button>
+      <button class="btn-danger" onclick="resetVCTR()">Reset VCTR</button>
+    </div>
+
+    <div>
+      <div class="sec-ttl">SUPPORT</div>
+      <button class="settings-link" style="width:100%;margin-bottom:8px;" onclick="showScreen('howto')">📖 How To Use VCTR<span>→</span></button>
+      <a href="mailto:[INSERT SUPPORT EMAIL]" class="settings-link" style="display:flex;text-decoration:none;margin-bottom:8px;">📧 Contact Support<span style="color:var(--muted);font-size:16px;">→</span></a>
+    </div>
+
+    <div>
+      <div class="sec-ttl">LEGAL</div>
+      <button class="settings-link" style="width:100%;margin-bottom:8px;" onclick="showScreen('privacy')">🔒 Privacy Policy<span>→</span></button>
+      <button class="settings-link" style="width:100%;" onclick="showScreen('terms')">📋 Terms of Use<span>→</span></button>
+    </div>
+
     <button class="btn-primary" onclick="saveSettings()">SAVE SETTINGS</button>
+
+    <div class="disclaimer-footer">VCTR is an independent routing tool. It is not affiliated with, endorsed by, or sponsored by Anthropic, OpenAI, Google, Perplexity, Meta, or any other AI platform referenced in the app. All third-party names and trademarks belong to their respective owners.</div>
+  </div>
+</div>
+
+<!-- PRIVACY POLICY -->
+<div id="screen-privacy" class="screen">
+  <div class="hdr"><div class="logo"><span class="arrow">→</span><span class="wordmark">VCTR</span></div><button class="icon-btn" onclick="goBack()">← Back</button></div>
+  <div class="legal-body">
+    <h2>Privacy Policy</h2>
+    <p class="eff">Effective Date: [INSERT DATE]</p>
+    <p>VCTR is operated by dkc / [INSERT LEGAL BUSINESS NAME] ("VCTR," "we," "us," or "our"). This Privacy Policy explains what information VCTR handles, what stays local, what may move to third-party tools, and how users stay in control.</p>
+    <h3>1. What VCTR Does</h3>
+    <p>VCTR helps users decide where a prompt or task should go next. VCTR currently supports two routing modes:</p>
+    <ul><li><strong style="color:var(--text);">Offline Routing:</strong> Uses keyword matching on this device/browser. No external AI call is made by VCTR.</li><li><strong style="color:var(--text);">Smart Routing:</strong> Uses the user's Anthropic API key to send the prompt directly to Anthropic for routing assistance.</li></ul>
+    <h3>2. Information VCTR May Store Locally</h3>
+    <ul><li>Your selected AI stack</li><li>Your routing preferences</li><li>Your optional Anthropic API key</li><li>Learned routing patterns based on your corrections</li><li>Basic local app settings</li></ul>
+    <p>This information is stored on the device/browser you use to access VCTR. VCTR does not currently operate a separate user account system or central database.</p>
+    <h3>3. Information That May Leave Your Device</h3>
+    <p>If you use Offline Routing, VCTR routes your prompt on-device using keyword matching only.</p>
+    <p>If you use Smart Routing, the prompt you enter may be sent directly from your device to Anthropic using your Anthropic API key. Anthropic may process that prompt according to their own terms and policies.</p>
+    <p>If you open a third-party AI destination, anything you submit there is handled by that platform, not VCTR.</p>
+    <h3>4. API Keys</h3>
+    <p>Your Anthropic API key is your credential. Treat it like a password. VCTR stores your API key locally on your device/browser if you choose to enable Smart Routing. VCTR does not operate a server to store API keys externally. Do not save an API key on a shared, public, or untrusted device.</p>
+    <h3>5. Prompts and User Content</h3>
+    <p>VCTR does not claim ownership of your prompts, tasks, or ideas. VCTR does not currently store your prompts on a VCTR-operated server. Do not enter sensitive, confidential, regulated, private, financial, medical, legal, or personal information unless you are comfortable sending that information to the selected third-party platform.</p>
+    <h3>6. Data We Do Not Sell</h3>
+    <p>VCTR does not sell user data. VCTR does not use prompt content for advertising. VCTR does not knowingly sell, rent, or trade API keys, prompts, routing settings, or learned route data.</p>
+    <h3>7. Analytics and Tracking</h3>
+    <p>At this time, VCTR does not use advertising trackers or third-party ad networks. If analytics or tracking tools are added in the future, this Privacy Policy will be updated before those tools are enabled.</p>
+    <h3>8. Data Controls</h3>
+    <p>Users can control local VCTR data through Settings. Users may clear learned routes, clear the saved API key, reset VCTR, or use Offline Routing instead of Smart Routing. Resetting VCTR clears local settings on that device. It does not delete data already submitted to Anthropic or another third-party platform.</p>
+    <h3>9. Children's Privacy</h3>
+    <p>VCTR is not intended for children under 13. VCTR does not knowingly collect personal information from children under 13.</p>
+    <h3>10. Security</h3>
+    <p>VCTR is designed to limit what it stores and to keep key settings local to the device/browser. However, no app, browser, device, or internet transmission is completely secure. Users are responsible for keeping their devices, browsers, accounts, and API keys secure.</p>
+    <h3>11. Third-Party Platforms</h3>
+    <p>VCTR may reference or connect users to third-party AI platforms. Those platforms are controlled by their own companies and governed by their own terms and privacy policies. VCTR is not responsible for the privacy, security, availability, billing, output, or behavior of third-party platforms.</p>
+    <h3>12. Changes to This Policy</h3>
+    <p>We may update this Privacy Policy as VCTR changes. If the app's data practices change in a meaningful way, the policy will be updated to reflect those changes.</p>
+    <h3>13. Contact</h3>
+    <p>Questions, privacy requests, or support needs can be sent to:<br/><a href="mailto:[INSERT SUPPORT EMAIL]" style="color:var(--c);">[INSERT SUPPORT EMAIL]</a></p>
+  </div>
+</div>
+
+<!-- TERMS OF USE -->
+<div id="screen-terms" class="screen">
+  <div class="hdr"><div class="logo"><span class="arrow">→</span><span class="wordmark">VCTR</span></div><button class="icon-btn" onclick="goBack()">← Back</button></div>
+  <div class="legal-body">
+    <h2>Terms of Use</h2>
+    <p class="eff">Effective Date: [INSERT DATE]</p>
+    <p>These Terms of Use apply to VCTR, operated by dkc / [INSERT LEGAL BUSINESS NAME]. By using VCTR, you agree to these Terms.</p>
+    <h3>1. What VCTR Is</h3>
+    <p>VCTR is a prompt routing tool. It helps users decide where a prompt, task, or idea should go next across their AI tool stack. VCTR does not replace human judgment. VCTR does not guarantee that every route, recommendation, or output will be accurate, complete, secure, or appropriate for every use case.</p>
+    <h3>2. Beta Status</h3>
+    <p>VCTR may be released as a beta product. Beta software may contain bugs, incomplete features, errors, downtime, inaccurate routing, or unexpected behavior. Use VCTR at your own discretion.</p>
+    <h3>3. User Responsibilities</h3>
+    <p>You are responsible for the prompts and content you enter, the AI tools you choose to use, reviewing all AI output before relying on it, protecting your API keys and accounts, managing your own third-party platform subscriptions and billing, and making sure your use of VCTR complies with applicable laws. Do not use VCTR to submit content you do not have the right to use. Do not use VCTR to create, route, or support harmful, unlawful, deceptive, or unsafe content.</p>
+    <h3>4. API Keys</h3>
+    <p>If you enable Smart Routing, you may choose to enter your own Anthropic API key. You are responsible for your API key, Anthropic account, usage, billing, and security settings. VCTR is not responsible for charges, misuse, unauthorized access, rate limits, or account issues related to your Anthropic account or any other third-party platform.</p>
+    <h3>5. Third-Party Services</h3>
+    <p>VCTR may reference or connect to third-party tools, including AI platforms. VCTR does not control third-party platforms. VCTR is not responsible for their availability, policies, privacy practices, billing, security, outputs, or decisions. Use third-party platforms at your own discretion and review their own terms and policies.</p>
+    <h3>6. No Professional Advice</h3>
+    <p>VCTR is not legal, financial, medical, security, employment, tax, or professional advice. Any routing recommendation is for workflow assistance only. You are responsible for reviewing the final destination, final prompt, and final output.</p>
+    <h3>7. No Warranty</h3>
+    <p>VCTR is provided "as is" and "as available." We do not promise that VCTR will be uninterrupted, error-free, secure, accurate, available, or suitable for a specific purpose.</p>
+    <h3>8. Limitation of Liability</h3>
+    <p>To the fullest extent allowed by law, dkc / [INSERT LEGAL BUSINESS NAME] will not be liable for indirect, incidental, special, consequential, exemplary, or punitive damages, or for lost profits, lost data, business interruption, API charges, third-party account issues, or reliance on AI-generated output.</p>
+    <h3>9. Indemnification</h3>
+    <p>You agree to defend, indemnify, and hold harmless dkc / [INSERT LEGAL BUSINESS NAME] from claims, damages, losses, liabilities, costs, and expenses arising from your use of VCTR, your prompts, your API keys, your third-party platform use, your violation of these Terms, or your violation of someone else's rights.</p>
+    <h3>10. Intellectual Property</h3>
+    <p>VCTR, including its name, interface, copy, design, structure, and functionality, is owned by dkc / [INSERT LEGAL BUSINESS NAME] unless otherwise stated. You may not copy, resell, reverse engineer, misuse, or redistribute VCTR without permission.</p>
+    <h3>11. Independent Tool Disclaimer</h3>
+    <p>VCTR is an independent routing tool. It is not affiliated with, endorsed by, or sponsored by Anthropic, OpenAI, Google, Perplexity, Meta, or any other AI platform referenced in the app. All third-party names, logos, and trademarks belong to their respective owners.</p>
+    <h3>12. Changes to VCTR</h3>
+    <p>We may update, change, pause, or discontinue VCTR at any time. We may also update these Terms as VCTR changes. Continued use means you accept the updated Terms.</p>
+    <h3>13. Governing Law</h3>
+    <p>These Terms are governed by the laws of the State of Colorado, United States, unless another jurisdiction is required by applicable law.</p>
+    <h3>14. Contact</h3>
+    <p>Questions or support requests can be sent to:<br/><a href="mailto:[INSERT SUPPORT EMAIL]" style="color:var(--c);">[INSERT SUPPORT EMAIL]</a></p>
   </div>
 </div>
 
 </div>
 <script>
-// ── Platforms ──────────────────────────────────────────────────────────────
-const PLATS = [
-  {id:'claude',    name:'Claude',         color:'#FF6B35', url:t=>`https://claude.ai/new?q=${E(t)}`},
-  {id:'chatgpt',   name:'ChatGPT',        color:'#00D4AA', url:t=>`https://chat.openai.com/?q=${E(t)}`},
-  {id:'gemini',    name:'Gemini',         color:'#4B9EFF', url:t=>`https://gemini.google.com/app?q=${E(t)}`},
-  {id:'perplexity',name:'Perplexity',     color:'#20B2AA', url:t=>`https://www.perplexity.ai/search?q=${E(t)}`},
-  {id:'metaai',    name:'Meta AI',        color:'#0082FB', url:t=>`https://www.meta.ai/?q=${E(t)}`},
-  {id:'grok',      name:'Grok',           color:'#E8E8E8', url:t=>`https://grok.com/?q=${E(t)}`},
-  {id:'notion',    name:'Notion',         color:'#C8C8C8', url:t=>`https://www.notion.so/new?content=${E(t)}`},
-  {id:'calendar',  name:'Google Calendar',color:'#F59E0B', url:t=>`https://calendar.google.com/calendar/r/eventedit?text=${E(t)}`},
-  {id:'gmail',     name:'Gmail',          color:'#EA4335', url:t=>`https://mail.google.com/mail/?view=cm&su=${E(t)}`},
+const PLATS=[
+  {id:'claude',    name:'Claude',         color:'#FF6B35',url:t=>`https://claude.ai/new?q=${E(t)}`},
+  {id:'chatgpt',   name:'ChatGPT',        color:'#00D4AA',url:t=>`https://chat.openai.com/?q=${E(t)}`},
+  {id:'gemini',    name:'Gemini',         color:'#4B9EFF',url:t=>`https://gemini.google.com/app?q=${E(t)}`},
+  {id:'perplexity',name:'Perplexity',     color:'#20B2AA',url:t=>`https://www.perplexity.ai/search?q=${E(t)}`},
+  {id:'metaai',    name:'Meta AI',        color:'#0082FB',url:t=>`https://www.meta.ai/?q=${E(t)}`},
+  {id:'grok',      name:'Grok',           color:'#E8E8E8',url:t=>`https://grok.com/?q=${E(t)}`},
+  {id:'notion',    name:'Notion',         color:'#C8C8C8',url:t=>`https://www.notion.so/new?content=${E(t)}`},
+  {id:'calendar',  name:'Google Calendar',color:'#F59E0B',url:t=>`https://calendar.google.com/calendar/r/eventedit?text=${E(t)}`},
+  {id:'gmail',     name:'Gmail',          color:'#EA4335',url:t=>`https://mail.google.com/mail/?view=cm&su=${E(t)}`},
 ];
-const E = t => encodeURIComponent(t);
-const P = id => PLATS.find(p=>p.id===id);
-
-// ── Default config ─────────────────────────────────────────────────────────
-let cfg = {
-  apiKey:'', useOffline:true, learningEnabled:true,
-  rules:{coding:'claude',creative:'claude',brand:'chatgpt',research:'perplexity',notes:'notion',schedule:'calendar',email:'gmail',search:'gemini'},
-  learnedRoutes:{},
-  platforms:['claude','chatgpt','gemini','perplexity','metaai','notion','calendar','gmail']
-};
-
-// ── Persist ────────────────────────────────────────────────────────────────
+const E=t=>encodeURIComponent(t);
+const P=id=>PLATS.find(p=>p.id===id);
+let cfg={apiKey:'',useOffline:true,learningEnabled:true,smartConsent:false,rules:{coding:'claude',creative:'claude',brand:'chatgpt',research:'perplexity',notes:'notion',schedule:'calendar',email:'gmail',search:'gemini'},learnedRoutes:{},platforms:['claude','chatgpt','gemini','perplexity','metaai','notion','calendar','gmail']};
+let autoRoute=true,isListening=false,rec=null,capturedText='',lastResult=null,lastInput='',prevScreen='main';
 function loadCfg(){try{const s=localStorage.getItem('vctr');if(s)cfg={...cfg,...JSON.parse(s)};}catch(e){}}
 function saveCfg(){try{localStorage.setItem('vctr',JSON.stringify(cfg));}catch(e){}}
-
-// ── State ──────────────────────────────────────────────────────────────────
-let autoRoute=true, isListening=false, rec=null, capturedText='', lastResult=null, lastInput='';
-
-// ── Routing ────────────────────────────────────────────────────────────────
-const STOP = new Set(['i','want','to','a','an','the','is','it','for','of','and','or','but','in','on','at','with','by','from','as','this','that','my','your','its','me','we','us','can','will','would','could','should','have','has','had','do','does','did','be','been','about','now','just','like','get','make','need','use','let','also','then','so','if','some','they','them','there','here','put','together','some','help','pulling']);
-
-function keywords(text){
-  return [...new Set(text.toLowerCase().replace(/[^a-z0-9\s]/g,' ').split(/\s+/).filter(w=>w.length>=3&&!STOP.has(w)))].slice(0,8);
-}
-
+const STOP=new Set(['i','want','to','a','an','the','is','it','for','of','and','or','but','in','on','at','with','by','from','as','this','that','my','your','its','me','we','us','can','will','would','could','should','have','has','had','do','does','did','be','been','about','now','just','like','get','make','need','use','let','also','then','so','if','some','they','them','there','here','put','together','help','pulling']);
+function keywords(text){return[...new Set(text.toLowerCase().replace(/[^a-z0-9\s]/g,' ').split(/\s+/).filter(w=>w.length>=3&&!STOP.has(w)))].slice(0,8);}
 function kwRoute(text){
-  const t=text.toLowerCase();
-  const R=cfg.rules;
-  // Check learned first
-  for(const [pid,kws] of Object.entries(cfg.learnedRoutes||{})){
-    if((kws||[]).some(k=>t.includes(k))) return {type:'route',destination:pid,reason:'Your learned routing',refined:text,learned:true};
-  }
+  const t=text.toLowerCase(),R=cfg.rules;
+  for(const[pid,kws]of Object.entries(cfg.learnedRoutes||{})){if((kws||[]).some(k=>t.includes(k))&&P(pid))return{type:'route',destination:pid,reason:'Your learned routing',refined:text,learned:true};}
   const checks=[
     {keys:['build an app','build a ','build me','create an app','make an app','develop an app','build a website','build a tool','app idea','build something','mvp','prototype','software','web app','mobile app','startup','code','function','debug','bug','script','python','javascript','typescript','api','sql','html','css','error','algorithm','refactor','deploy','frontend','backend','github','component','database','programming','developer'],cat:'coding'},
     {keys:['brand','marketing','campaign','copy','slogan','social media','instagram','linkedin','caption','tweet','post','ad copy','headline','cta','landing page','tagline','content strategy','launch copy','product description','website copy','presentation','slide deck','slides','powerpoint','pitch deck','outline','brand voice','in my brand','social media plan','content calendar'],cat:'brand'},
     {keys:['write','story','poem','creative','blog','article','essay','fiction','draft','brainstorm','brainstorming','ideas','think through','concept','narrative','novel','screenplay','script','character','plot','theme','help me write','long form'],cat:'creative'},
-    {keys:['research','find out','look up','what is','who is','when did','how does','explain','source','fact','statistic','cite','citation','study','data','compare','versus','vs','history of','learn about','news','current events','latest','recently','evidence'],cat:'research'},
+    {keys:['research','find out','look up','what is','who is','when did','how does','explain','source','fact','statistic','cite','study','data','compare','versus','vs','history of','learn about','news','current events','latest','recently','evidence'],cat:'research'},
     {keys:['note','notes','task','todo','to do','to-do','organize','list','track','project','remind','checklist','capture','log','journal','meeting notes','write down','knowledge base'],cat:'notes'},
     {keys:['schedule','calendar','meeting','appointment','event','remind me','tomorrow','next week','monday','tuesday','wednesday','thursday','friday','saturday','sunday','tonight','this week','standup','book a','set a reminder','add to calendar'],cat:'schedule'},
     {keys:['email','send an email','write an email','reply to','follow up','draft an email','reach out','write to','dear','subject line','professional email','business email','client email'],cat:'email'},
     {keys:['buy','price','cost','cheapest','best deal','review','near me','nearby','how much','shop','order','find a','restaurant','coffee','hotel','weather','forecast','news today','what happened','current','trending'],cat:'search'},
   ];
-  for(const {keys,cat} of checks){
-    if(keys.some(k=>t.includes(k))){
-      const dest=R[cat]||R.other||'gemini';
-      return {type:'route',destination:dest,reason:`Routed by keyword (${cat})`,refined:text};
-    }
-  }
-  return {type:'route',destination:R.other||'gemini',reason:'Default routing',refined:text};
+  for(const{keys,cat}of checks){if(keys.some(k=>t.includes(k))){const dest=R[cat]||R.other||'gemini';return{type:'route',destination:dest,reason:`Routed by keyword (${cat})`,refined:text};}}
+  return{type:'route',destination:R.other||'gemini',reason:'Default routing',refined:text};
 }
-
 function splitRoute(text){
   const chunks=text.split(/\n+/).flatMap(c=>c.split(/[.!?]\s+(?=[A-Z])/)).map(s=>s.trim()).filter(s=>s.length>8);
-  if(chunks.length<=1) return kwRoute(text);
+  if(chunks.length<=1)return kwRoute(text);
   const results=chunks.map(c=>({...kwRoute(c),excerpt:c,refined:c}));
   const dests=[...new Set(results.map(r=>r.destination))];
-  if(dests.length===1) return kwRoute(text);
-  return {type:'multi',items:results.map(r=>({type:'route',destination:r.destination,reason:r.reason,refined:r.excerpt,excerpt:r.excerpt.length>55?r.excerpt.slice(0,55)+'…':r.excerpt}))};
+  if(dests.length===1)return kwRoute(text);
+  return{type:'multi',items:results.map(r=>({type:'route',destination:r.destination,reason:r.reason,refined:r.excerpt,excerpt:r.excerpt.length>55?r.excerpt.slice(0,55)+'…':r.excerpt}))};
 }
-
 async function route(input){
-  lastInput=input;
-  setPhase('routing');
+  lastInput=input;setPhase('routing');
   try{
     let parsed;
     if(cfg.apiKey&&!cfg.useOffline){
-      const res=await fetch('https://api.anthropic.com/v1/messages',{
-        method:'POST',
-        headers:{'Content-Type':'application/json','x-api-key':cfg.apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
-        body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:1000,
-          system:`You are VCTR, a personal AI routing assistant. Connected platforms: ${cfg.platforms.join(', ')}. User rules: ${JSON.stringify(cfg.rules)}. Respond JSON only: {"type":"route","destination":"id","reason":"one sentence","refined":"ideal prompt","override":false} or {"type":"multi","items":[...]} or {"type":"clarify","questions":[...]}`,
-          messages:[{role:'user',content:input}]}),
-        signal:AbortSignal.timeout(12000)});
-      const d=await res.json();
-      const raw=d.content?.map(c=>c.text||'').join('')||'';
+      const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':cfg.apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:1000,system:`You are VCTR, a personal AI routing assistant. Connected platforms: ${cfg.platforms.join(', ')}. User rules: ${JSON.stringify(cfg.rules)}. Respond JSON only: {"type":"route","destination":"id","reason":"one sentence","refined":"ideal prompt","override":false} or {"type":"multi","items":[...]}`,messages:[{role:'user',content:input}]}),signal:AbortSignal.timeout(12000)});
+      const d=await res.json();const raw=d.content?.map(c=>c.text||'').join('')||'';
       parsed=JSON.parse(raw.replace(/```json|```/g,'').trim());
-    } else {
-      parsed=splitRoute(input);
-    }
+    }else{parsed=splitRoute(input);}
     handleResult(parsed);
-  }catch(e){
-    const f=splitRoute(input);
-    f.reason=(f.reason||'')+ ' (offline)';
-    handleResult(f);
-  }
+  }catch(e){const f=splitRoute(input);f.reason=(f.reason||'')+' (offline)';handleResult(f);}
 }
-
-function handleResult(p){
-  lastResult=p;
-  if(p.type==='route') showResult(p);
-  else if(p.type==='multi') showMulti(p);
-  else route(lastInput); // clarify fallback — just re-route
-}
-
-// ── Display ────────────────────────────────────────────────────────────────
+function handleResult(p){lastResult=p;if(p.type==='route')showResult(p);else if(p.type==='multi')showMulti(p);else{const f=splitRoute(lastInput);handleResult(f);}}
 function showResult(item){
-  const pl=P(item.destination); if(!pl)return;
+  const pl=P(item.destination);if(!pl)return;
   setPhase('result');
-  const badge=`<div style="background:${pl.color}22;border:1px solid ${pl.color}44;width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:${pl.color};">${pl.name[0]}</div>`;
-  document.getElementById('rbadge').innerHTML=badge;
-  document.getElementById('rname').textContent=pl.name;
-  document.getElementById('rname').style.color=pl.color;
+  document.getElementById('rbadge').innerHTML=`<div style="background:${pl.color}22;border:1px solid ${pl.color}44;width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:${pl.color};">${pl.name[0]}</div>`;
+  document.getElementById('rname').textContent=pl.name;document.getElementById('rname').style.color=pl.color;
   document.getElementById('rreason').textContent=(item.learned?'🧠 ':item.offline?'⚡ ':'')+item.reason;
   document.getElementById('rprompt').textContent=item.refined;
   document.getElementById('rbar').style.background=`linear-gradient(90deg,${pl.color},${pl.color}44)`;
-  document.getElementById('rinner').style.background=`linear-gradient(150deg,${pl.color}12 0%,rgba(5,8,15,.97) 55%)`;
-  document.getElementById('rinner').style.border=`1px solid ${pl.color}22`;
-  document.getElementById('rinner').style.borderTop='none';
+  document.getElementById('rinner').style.cssText=`background:linear-gradient(150deg,${pl.color}12 0%,rgba(5,8,15,.97) 55%);border:1px solid ${pl.color}22;border-top:none;padding:13px 15px;`;
   document.getElementById('btn-open').textContent=`OPEN IN ${pl.name.toUpperCase()} ↗`;
-  document.getElementById('btn-open').style.background=`linear-gradient(135deg,${pl.color},${pl.color}cc)`;
-  document.getElementById('btn-open').style.color='#05080F';
-  // Build reroute grid
-  const grid=document.getElementById('reroute-grid');
-  grid.innerHTML='';
-  PLATS.filter(p=>cfg.platforms.includes(p.id)&&p.id!==item.destination).forEach(p=>{
-    const b=document.createElement('button');
-    b.className='rre-btn';
-    b.style.cssText=`background:${p.color}12;border-color:${p.color}33;color:${p.color};`;
-    b.innerHTML=`<div class="rre-ico" style="background:${p.color}22;color:${p.color};">${p.name[0]}</div><span class="rre-name">${p.name}</span>`;
-    b.onclick=()=>rerouteTo(p.id);
-    grid.appendChild(b);
-  });
+  document.getElementById('btn-open').style.cssText=`background:linear-gradient(135deg,${pl.color},${pl.color}cc);color:#05080F;flex:1;border:none;border-radius:9px;padding:11px;font-weight:800;font-size:12px;letter-spacing:.5px;`;
+  const grid=document.getElementById('reroute-grid');grid.innerHTML='';
+  PLATS.filter(p=>cfg.platforms.includes(p.id)&&p.id!==item.destination).forEach(p=>{const b=document.createElement('button');b.className='rre-btn';b.style.cssText=`background:${p.color}12;border-color:${p.color}33;color:${p.color};`;b.innerHTML=`<div class="rre-ico" style="background:${p.color}22;color:${p.color};">${p.name[0]}</div><span class="rre-name">${p.name}</span>`;b.onclick=()=>rerouteTo(p.id);grid.appendChild(b);});
 }
-
 function showMulti(data){
-  setPhase('multi');
-  document.getElementById('mlbl').textContent=`${data.items.length} ITEMS — TAP TO OPEN EACH`;
-  const c=document.getElementById('multi-items'); c.innerHTML='';
-  data.items.forEach(item=>{
-    const pl=P(item.destination); if(!pl)return;
-    const b=document.createElement('button');
-    b.className='mitem';
-    b.style.cssText=`border-color:${pl.color}22;width:100%;`;
-    b.innerHTML=`<div class="mico" style="background:${pl.color}18;border:1px solid ${pl.color}33;color:${pl.color};">${pl.name[0]}</div><div style="flex:1;min-width:0;"><div class="mname" style="color:${pl.color};">${pl.name}</div><div class="mexc">${item.excerpt}</div></div><span style="color:${pl.color}55;font-size:16px;">→</span>`;
-    b.onclick=()=>{window.open(pl.url(item.refined),'_blank');navigator.clipboard?.writeText(item.refined).catch(()=>{});};
-    c.appendChild(b);
-  });
+  setPhase('multi');document.getElementById('mlbl').textContent=`${data.items.length} ITEMS — TAP TO OPEN EACH`;
+  const c=document.getElementById('multi-items');c.innerHTML='';
+  data.items.forEach(item=>{const pl=P(item.destination);if(!pl)return;const b=document.createElement('button');b.className='mitem';b.style.cssText=`border-color:${pl.color}22;`;b.innerHTML=`<div class="mico" style="background:${pl.color}18;border:1px solid ${pl.color}33;color:${pl.color};">${pl.name[0]}</div><div style="flex:1;min-width:0;"><div class="mname" style="color:${pl.color};">${pl.name}</div><div class="mexc">${item.excerpt}</div></div><span style="color:${pl.color}55;font-size:16px;">→</span>`;b.onclick=()=>{window.open(pl.url(item.refined),'_blank');navigator.clipboard?.writeText(item.refined).catch(()=>{});};c.appendChild(b);});
 }
-
-function openPlatform(){
-  if(!lastResult||lastResult.type!=='route')return;
-  const pl=P(lastResult.destination); if(!pl)return;
-  window.open(pl.url(lastResult.refined),'_blank');
-  navigator.clipboard?.writeText(lastResult.refined).catch(()=>{});
-}
-
-function copyPrompt(){
-  if(!lastResult||lastResult.type!=='route')return;
-  navigator.clipboard?.writeText(lastResult.refined).catch(()=>{});
-  document.querySelector('.btn-copy').textContent='✓';
-  setTimeout(()=>document.querySelector('.btn-copy').textContent='Copy',2000);
-}
-
+function openPlatform(){if(!lastResult||lastResult.type!=='route')return;const pl=P(lastResult.destination);if(!pl)return;window.open(pl.url(lastResult.refined),'_blank');navigator.clipboard?.writeText(lastResult.refined).catch(()=>{});}
+function copyPrompt(){if(!lastResult||lastResult.type!=='route')return;navigator.clipboard?.writeText(lastResult.refined).catch(()=>{});const b=document.querySelector('.btn-copy');b.textContent='✓';setTimeout(()=>b.textContent='Copy',2000);}
 function rerouteTo(pid){
-  if(!lastResult)return;
-  const pl=P(pid); if(!pl)return;
-  const text=lastResult.refined||lastInput;
-  window.open(pl.url(text),'_blank');
-  navigator.clipboard?.writeText(text).catch(()=>{});
-  if(cfg.learningEnabled){
-    const kws=keywords(text);
-    if(kws.length){
-      const lr=cfg.learnedRoutes||{};
-      lr[pid]=[...new Set([...(lr[pid]||[]),...kws])];
-      cfg.learnedRoutes=lr; saveCfg();
-      showLearnedToast(kws.slice(0,3),pl.name);
-    }
-  }
+  if(!lastResult)return;const pl=P(pid);if(!pl)return;const text=lastResult.refined||lastInput;
+  window.open(pl.url(text),'_blank');navigator.clipboard?.writeText(text).catch(()=>{});
+  if(cfg.learningEnabled){const kws=keywords(text);if(kws.length){const lr=cfg.learnedRoutes||{};lr[pid]=[...new Set([...(lr[pid]||[]),...kws])];cfg.learnedRoutes=lr;saveCfg();showLearnedToast(kws.slice(0,3),pl.name);}}
   hideReroute();
 }
-
-function showLearnedToast(kws,name){
-  const t=document.createElement('div');
-  t.style.cssText='position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(0,229,255,.12);border:1px solid rgba(0,229,255,.3);border-radius:10px;padding:9px 14px;font-family:JetBrains Mono,monospace;font-size:10px;color:rgba(0,229,255,.85);white-space:nowrap;z-index:99;animation:su .3s ease;';
-  t.textContent=`🧠 Learned: "${kws.join('", "')}" → ${name}`;
-  document.body.appendChild(t);
-  setTimeout(()=>t.remove(),3500);
-}
-
-// ── Phases ─────────────────────────────────────────────────────────────────
+function showLearnedToast(kws,name){const t=document.createElement('div');t.style.cssText='position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(0,229,255,.12);border:1px solid rgba(0,229,255,.3);border-radius:10px;padding:9px 14px;font-family:JetBrains Mono,monospace;font-size:10px;color:rgba(0,229,255,.85);white-space:nowrap;z-index:99;animation:su .3s ease;';t.textContent=`🧠 Learned: "${kws.join('", "')}" → ${name}`;document.body.appendChild(t);setTimeout(()=>t.remove(),3500);}
 function setPhase(ph){
   document.getElementById('loading').style.display=ph==='routing'?'flex':'none';
   document.getElementById('result').style.display=ph==='result'?'flex':'none';
   document.getElementById('multi').style.display=ph==='multi'?'flex':'none';
-  const capEl=document.getElementById('captured');
-  if(ph!=='result'&&ph!=='multi'){capEl.style.display='none';}
-  if(ph!=='routing'){
-    const mic=document.getElementById('mic');
-    if(ph==='idle'&&mic.classList.contains('rec')){}
-  }
 }
-
-function resetAll(){
-  setPhase('idle');
-  document.getElementById('input').value='';
-  capturedText=''; lastResult=null;
-  document.getElementById('captured').style.display='none';
-  document.getElementById('reroute').style.display='none';
-}
-
+function resetAll(){setPhase('idle');document.getElementById('input').value='';capturedText='';lastResult=null;document.getElementById('captured').style.display='none';document.getElementById('reroute').style.display='none';document.getElementById('route-now').style.display='none';}
 function showReroute(){document.getElementById('reroute').style.display='flex';}
 function hideReroute(){document.getElementById('reroute').style.display='none';}
-
-// ── Voice ──────────────────────────────────────────────────────────────────
 function toggleMic(){isListening?stopMic():startMic();}
 function startMic(){
-  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  if(!SR){alert('Voice not available. Use Type mode.');return;}
-  rec=new SR(); rec.continuous=true; rec.interimResults=true;
-  let buf='';
-  rec.onresult=e=>{
-    let intr='';
-    for(let i=e.resultIndex;i<e.results.length;i++){
-      if(e.results[i].isFinal)buf+=(buf?' ':'')+e.results[i][0].transcript.trim();
-      else intr=e.results[i][0].transcript;
-    }
-    capturedText=buf;
-    document.getElementById('interim').textContent=intr;
-    if(buf){const c=document.getElementById('captured');c.textContent=`"${buf}"`;c.style.display='block';}
-  };
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){alert('Voice not available. Use Type mode.');return;}
+  rec=new SR();rec.continuous=true;rec.interimResults=true;let buf='';
+  rec.onresult=e=>{let intr='';for(let i=e.resultIndex;i<e.results.length;i++){if(e.results[i].isFinal)buf+=(buf?' ':'')+e.results[i][0].transcript.trim();else intr=e.results[i][0].transcript;}capturedText=buf;document.getElementById('interim').textContent=intr;if(buf){const c=document.getElementById('captured');c.textContent=`"${buf}"`;c.style.display='block';}};
   rec.onerror=()=>stopMic();
-  rec.onend=()=>{
-    const c=buf.trim(); buf=''; stopMic();
-    if(autoRoute&&c) route(c);
-    else if(c&&!autoRoute){document.getElementById('route-now').style.display='block';}
-  };
-  rec.start(); isListening=true;
-  document.getElementById('mic').classList.add('rec');
-  document.getElementById('mic').textContent='⏹';
-  document.getElementById('vstatus').classList.add('rec');
-  document.getElementById('vstatus').textContent='● RECORDING';
-  try{navigator.vibrate?.(30);}catch(e){}
+  rec.onend=()=>{const c=buf.trim();buf='';stopMic();if(autoRoute&&c)route(c);else if(c&&!autoRoute)document.getElementById('route-now').style.display='block';};
+  rec.start();isListening=true;document.getElementById('mic').classList.add('rec');document.getElementById('mic').textContent='⏹';document.getElementById('vstatus').classList.add('rec');document.getElementById('vstatus').textContent='● RECORDING';try{navigator.vibrate?.(30);}catch(e){}
 }
-function stopMic(){
-  try{rec?.stop();}catch(e){}
-  isListening=false;
-  document.getElementById('mic').classList.remove('rec');
-  document.getElementById('mic').textContent='🎙';
-  document.getElementById('vstatus').classList.remove('rec');
-  document.getElementById('vstatus').textContent='TAP TO SPEAK';
-}
-function toggleAuto(){
-  autoRoute=!autoRoute;
-  document.getElementById('auto-tog').classList.toggle('on',autoRoute);
-}
-function routeNow(){
-  document.getElementById('route-now').style.display='none';
-  if(capturedText) route(capturedText);
-}
-function routeText(){
-  const t=document.getElementById('input').value.trim();
-  if(t) route(t);
-}
-
-// ── Mode ───────────────────────────────────────────────────────────────────
-function setMode(m){
-  document.getElementById('voice-sec').style.display=m==='voice'?'flex':'none';
-  document.getElementById('kb-sec').style.display=m==='keyboard'?'flex':'none';
-  document.getElementById('tab-voice').classList.toggle('on',m==='voice');
-  document.getElementById('tab-kb').classList.toggle('on',m==='keyboard');
-  resetAll();
-}
-
-// ── Setup ──────────────────────────────────────────────────────────────────
-const setupState={useOffline:true,learningEnabled:true};
-function toggleChk(boxId,key){
-  setupState[key]=!setupState[key];
-  document.getElementById(boxId).classList.toggle('on',setupState[key]);
-  document.getElementById(boxId).textContent=setupState[key]?'✓':'';
-}
+function stopMic(){try{rec?.stop();}catch(e){}isListening=false;document.getElementById('mic').classList.remove('rec');document.getElementById('mic').textContent='🎙';document.getElementById('vstatus').classList.remove('rec');document.getElementById('vstatus').textContent='TAP TO SPEAK';}
+function toggleAuto(){autoRoute=!autoRoute;document.getElementById('auto-tog').classList.toggle('on',autoRoute);}
+function routeNow(){document.getElementById('route-now').style.display='none';if(capturedText)route(capturedText);}
+function routeText(){const t=document.getElementById('input').value.trim();if(t)route(t);}
+function setMode(m){document.getElementById('voice-sec').style.display=m==='voice'?'flex':'none';document.getElementById('kb-sec').style.display=m==='keyboard'?'flex':'none';document.getElementById('tab-voice').classList.toggle('on',m==='voice');document.getElementById('tab-kb').classList.toggle('on',m==='keyboard');resetAll();}
+const setupState={useOffline:true,learningEnabled:true,smartConsent:false};
+function toggleChk(boxId,key){setupState[key]=!setupState[key];const el=document.getElementById(boxId);el.classList.toggle('on',setupState[key]);el.textContent=setupState[key]?'✓':'';}
 function finishSetup(){
   const key=document.getElementById('api-key').value.trim();
-  if(!key&&!setupState.useOffline){document.getElementById('setup-err').textContent='Enter your API key or check "Use offline routing"';document.getElementById('setup-err').style.display='block';return;}
-  cfg.apiKey=key; cfg.useOffline=setupState.useOffline; cfg.learningEnabled=setupState.learningEnabled;
-  saveCfg(); initMain(); showScreen('main');
+  if(key&&!setupState.smartConsent){document.getElementById('setup-err').textContent='Please check the Smart Routing consent box to use your API key.';document.getElementById('setup-err').style.display='block';return;}
+  if(!key&&!setupState.useOffline){document.getElementById('setup-err').textContent='Enter your API key or enable Offline Routing.';document.getElementById('setup-err').style.display='block';return;}
+  cfg.apiKey=key;cfg.useOffline=setupState.useOffline||!key;cfg.learningEnabled=setupState.learningEnabled;cfg.smartConsent=setupState.smartConsent;
+  saveCfg();initMain();showScreen('main');
 }
-
-// ── Settings ───────────────────────────────────────────────────────────────
 function saveSetting(){}
 function saveSettings(){
   const key=document.getElementById('set-key').value.trim();
-  if(key) cfg.apiKey=key;
-  cfg.learningEnabled=setupState.learningEnabled;
-  saveCfg(); initMain();
-  document.querySelector('#screen-settings .btn-primary').textContent='✓ SAVED';
-  setTimeout(()=>{document.querySelector('#screen-settings .btn-primary').textContent='SAVE SETTINGS';showScreen('main');},1200);
+  if(key)cfg.apiKey=key;cfg.useOffline=setupState.useOffline;cfg.learningEnabled=setupState.learningEnabled;
+  saveCfg();initMain();
+  const b=document.querySelector('#screen-settings .btn-primary');b.textContent='✓ SAVED';setTimeout(()=>{b.textContent='SAVE SETTINGS';showScreen('main');},1200);
 }
-
+function clearApiKey(){if(confirm('Clear your saved API key?')){cfg.apiKey='';cfg.useOffline=true;saveCfg();initMain();document.getElementById('set-key').value='';showLearnedToast(['API key cleared'],'Settings');}}
+function clearLearnedRoutes(){if(confirm('Clear all learned routes?')){cfg.learnedRoutes={};saveCfg();initSettings();}}
+function resetVCTR(){if(confirm('Reset VCTR? This clears all local settings on this device.')){localStorage.removeItem('vctr');location.reload();}}
 function initSettings(){
   document.getElementById('set-key').value=cfg.apiKey||'';
-  setupState.learningEnabled=cfg.learningEnabled;
-  document.getElementById('set-learn-chk').classList.toggle('on',cfg.learningEnabled);
-  document.getElementById('set-learn-chk').textContent=cfg.learningEnabled?'✓':'';
-  // Show learned routes
-  const sec=document.getElementById('learned-section');
-  const lr=cfg.learnedRoutes||{};
-  if(Object.keys(lr).length===0){sec.innerHTML='';return;}
+  setupState.useOffline=cfg.useOffline;setupState.learningEnabled=cfg.learningEnabled;
+  document.getElementById('set-offline-chk').classList.toggle('on',cfg.useOffline);document.getElementById('set-offline-chk').textContent=cfg.useOffline?'✓':'';
+  document.getElementById('set-learn-chk').classList.toggle('on',cfg.learningEnabled);document.getElementById('set-learn-chk').textContent=cfg.learningEnabled?'✓':'';
+  const sec=document.getElementById('learned-section');const lr=cfg.learnedRoutes||{};
+  if(!Object.keys(lr).length){sec.innerHTML='';return;}
   sec.innerHTML='<div style="font-family:JetBrains Mono,monospace;font-size:8px;color:var(--dim);letter-spacing:1px;margin-bottom:6px;">WHAT I\'VE LEARNED</div>';
-  Object.entries(lr).forEach(([pid,kws])=>{
-    const pl=P(pid); if(!pl||!kws?.length)return;
-    const d=document.createElement('div'); d.className='learned-item';
-    d.innerHTML=`<span style="color:${pl.color};font-weight:700;">${pl.name}:</span> <span style="font-family:JetBrains Mono,monospace;font-size:9px;color:var(--dim);margin-left:6px;">${kws.join(', ')}</span><button class="btn-del" onclick="delLearned('${pid}')">×</button>`;
-    sec.appendChild(d);
-  });
-  const clr=document.createElement('button');
-  clr.style.cssText='background:none;border:none;color:rgba(255,100,100,.4);font-family:JetBrains Mono,monospace;font-size:9px;letter-spacing:1px;padding:6px 0;';
-  clr.textContent='Clear all learned routes';
-  clr.onclick=()=>{cfg.learnedRoutes={};saveCfg();initSettings();};
-  sec.appendChild(clr);
+  Object.entries(lr).forEach(([pid,kws])=>{const pl=P(pid);if(!pl||!kws?.length)return;const d=document.createElement('div');d.className='learned-item';d.innerHTML=`<span style="color:${pl.color};font-weight:700;">${pl.name}:</span><span style="font-family:JetBrains Mono,monospace;font-size:9px;color:var(--dim);margin-left:6px;">${kws.join(', ')}</span><button class="btn-del" onclick="delLearned('${pid}')">×</button>`;sec.appendChild(d);});
+  const clr=document.createElement('button');clr.style.cssText='background:none;border:none;color:rgba(255,100,100,.4);font-family:JetBrains Mono,monospace;font-size:9px;letter-spacing:1px;padding:6px 0;';clr.textContent='Clear all learned routes';clr.onclick=clearLearnedRoutes;sec.appendChild(clr);
 }
-
 function delLearned(pid){delete cfg.learnedRoutes[pid];saveCfg();initSettings();}
-
-// ── Main init ──────────────────────────────────────────────────────────────
 function initMain(){
   document.getElementById('mode-badge').textContent=cfg.useOffline?'⚡ OFFLINE':(cfg.apiKey?'🟢 ONLINE':'🟡 OFFLINE');
-  const strip=document.getElementById('strip'); strip.innerHTML='';
-  PLATS.filter(p=>cfg.platforms.includes(p.id)).forEach(p=>{
-    const d=document.createElement('div'); d.className='pip';
-    d.innerHTML=`<div class="pip-dot" style="background:${p.color};box-shadow:0 0 4px ${p.color}88;"></div><span class="pip-name">${p.name.toUpperCase()}</span>`;
-    strip.appendChild(d);
-  });
+  const strip=document.getElementById('strip');strip.innerHTML='';
+  PLATS.filter(p=>cfg.platforms.includes(p.id)).forEach(p=>{const d=document.createElement('div');d.className='pip';d.innerHTML=`<div class="pip-dot" style="background:${p.color};box-shadow:0 0 4px ${p.color}88;"></div><span class="pip-name">${p.name.toUpperCase()}</span>`;strip.appendChild(d);});
   setMode('voice');
 }
-
-// ── Screens ────────────────────────────────────────────────────────────────
 function showScreen(name){
+  const cur=document.querySelector('.screen.on');if(cur)prevScreen=cur.id.replace('screen-','');
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));
-  const s=document.getElementById('screen-'+name);
-  s.classList.add('on');
-  if(name==='settings') initSettings();
+  document.getElementById('screen-'+name).classList.add('on');
+  if(name==='settings')initSettings();
 }
-
-// ── Splash → init ──────────────────────────────────────────────────────────
+function goBack(){showScreen(prevScreen||'main');}
 window.addEventListener('DOMContentLoaded',()=>{
   loadCfg();
   setTimeout(()=>document.getElementById('sp-arr').classList.add('on'),200);
   setTimeout(()=>document.getElementById('sp-word').classList.add('on'),800);
   setTimeout(()=>document.getElementById('sp-tag').classList.add('on'),1400);
-  setTimeout(()=>{
-    if(cfg.apiKey||cfg.useOffline) {initMain();showScreen('main');}
-    else showScreen('setup');
-  },2500);
-  // Set up offline check based on saved config
-  setupState.useOffline=cfg.useOffline;
-  setupState.learningEnabled=cfg.learningEnabled;
-  document.getElementById('offline-chk').classList.toggle('on',cfg.useOffline);
-  document.getElementById('offline-chk').textContent=cfg.useOffline?'✓':'';
-  document.getElementById('learn-chk').classList.toggle('on',cfg.learningEnabled);
-  document.getElementById('learn-chk').textContent=cfg.learningEnabled?'✓':'';
+  setTimeout(()=>{if(cfg.apiKey||cfg.useOffline){initMain();showScreen('main');}else showScreen('setup');},2500);
+  setupState.useOffline=cfg.useOffline;setupState.learningEnabled=cfg.learningEnabled;setupState.smartConsent=cfg.smartConsent||false;
+  document.getElementById('offline-chk').classList.toggle('on',cfg.useOffline);document.getElementById('offline-chk').textContent=cfg.useOffline?'✓':'';
+  document.getElementById('learn-chk').classList.toggle('on',cfg.learningEnabled);document.getElementById('learn-chk').textContent=cfg.learningEnabled?'✓':'';
 });
 </script>
 </body>
