@@ -15,7 +15,7 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Syne',
 button{font-family:inherit;cursor:pointer;touch-action:manipulation;}
 button:active{opacity:.82;}
 ::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-thumb{background:#111820;border-radius:3px;}
-.screen{display:none;flex-direction:column;flex:1;overflow:hidden;}
+.screen{display:none;flex-direction:column;flex:1;overflow:hidden;}.screen.on{display:flex;}
 .screen.on{display:flex;}
 .hdr{display:flex;align-items:center;justify-content:space-between;padding:max(env(safe-area-inset-top),14px) 18px 13px;border-bottom:1px solid var(--border);flex-shrink:0;}
 .logo{display:flex;align-items:center;gap:9px;}
@@ -126,7 +126,7 @@ input[type=password],input[type=text],input[type=url],input[type=email]{width:10
 .howto-tagline p{font-size:22px;font-weight:800;line-height:1.5;color:var(--text);}
 .howto-tagline p span{color:var(--c);}
 /* Splash */
-#splash{background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;}
+#splash{background:var(--bg);flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;}
 .sp-arrow{font-size:72px;color:var(--c);text-shadow:0 0 40px #00E5FF66;transition:all .5s ease;opacity:0;transform:translateY(12px);}
 .sp-arrow.on{opacity:1;transform:translateY(0);}
 .sp-word{font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:800;letter-spacing:8px;color:var(--c);transition:opacity .5s ease;opacity:0;}
@@ -140,8 +140,8 @@ input[type=password],input[type=text],input[type=url],input[type=email]{width:10
 <div id="app">
 
 <!-- SPLASH -->
-<div id="screen-splash" class="screen on" style="display:flex;">
-  <div id="splash" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;">
+<div id="screen-splash" class="screen on">
+  <div id="splash" style="flex:1;flex-direction:column;align-items:center;justify-content:center;gap:16px;">
     <div class="sp-arrow" id="sp-arr">→</div>
     <div class="sp-word" id="sp-word">VCTR</div>
     <div class="sp-tag" id="sp-tag">YOUR AI, DIRECTED</div>
@@ -589,8 +589,9 @@ function initMain(){
 }
 function showScreen(name){
   const cur=document.querySelector('.screen.on');if(cur)prevScreen=cur.id.replace('screen-','');
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));
-  document.getElementById('screen-'+name).classList.add('on');
+  document.querySelectorAll('.screen').forEach(s=>{s.classList.remove('on');s.style.display='none';});
+  const el=document.getElementById('screen-'+name);
+  el.classList.add('on');el.style.display='flex';
   if(name==='settings')initSettings();
 }
 function goBack(){showScreen(prevScreen||'main');}
