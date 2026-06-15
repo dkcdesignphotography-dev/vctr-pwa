@@ -530,6 +530,11 @@ input[type=password],input[type=text],input[type=url],input[type=email]{
     </div>
 
     <div>
+      <div class="sec-ttl">YOUR STACK</div>
+      <button class="settings-link" style="width:100%;margin-bottom:8px;" onclick="showScreen('rules');renderRulesList();">⚡ My Routing Rules<span>→</span></button>
+      <button class="settings-link" style="width:100%;" onclick="showScreen('resources');renderResources();">📊 Platform Guide<span>→</span></button>
+    </div>
+    <div>
       <div class="sec-ttl">SUPPORT</div>
       <button class="settings-link" style="width:100%;margin-bottom:8px;" onclick="showScreen('howto')">📖 How To Use VCTR<span>→</span></button>
       <a href="mailto:[INSERT SUPPORT EMAIL]" class="settings-link" style="display:flex;text-decoration:none;margin-bottom:8px;">📧 Contact Support<span style="color:var(--muted);font-size:16px;">→</span></a>
@@ -622,6 +627,40 @@ input[type=password],input[type=text],input[type=url],input[type=email]{
     <p>These Terms are governed by the laws of the State of Colorado, United States, unless another jurisdiction is required by applicable law.</p>
     <h3>14. Contact</h3>
     <p>Questions or support requests can be sent to:<br/><a href="mailto:[INSERT SUPPORT EMAIL]" style="color:var(--c);">[INSERT SUPPORT EMAIL]</a></p>
+  </div>
+</div>
+
+<!-- ROUTING RULES EDITOR -->
+<div id="screen-rules" class="screen">
+  <div class="hdr"><div class="logo"><span class="arrow">→</span><span class="wordmark">VCTR</span></div><button class="icon-btn" onclick="goBack()">← Back</button></div>
+  <div class="scroll-body">
+    <div style="margin-bottom:16px;">
+      <div style="font-size:18px;font-weight:800;margin-bottom:6px;">Your Routing Rules</div>
+      <div style="font-size:13px;font-weight:400;color:var(--muted);line-height:1.7;">Tap any category to change which AI handles it. Update anytime as platforms evolve.</div>
+    </div>
+    <div id="rules-list"></div>
+    <div id="rules-picker" style="display:none;background:rgba(5,8,15,.98);border:1px solid var(--border);border-radius:16px;padding:16px;margin-bottom:12px;">
+      <div style="font-size:11px;font-weight:600;color:var(--c);letter-spacing:2px;margin-bottom:12px;" id="rules-picker-label">CHOOSE PLATFORM</div>
+      <div id="rules-picker-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;"></div>
+      <button onclick="closeRulesPicker()" style="width:100%;background:none;border:none;color:var(--dim);font-size:13px;font-weight:500;padding:14px 0 2px;min-height:44px;font-family:var(--mono);">cancel</button>
+    </div>
+    <div style="background:rgba(0,229,255,.06);border:1px solid rgba(0,229,255,.15);border-radius:13px;padding:14px 15px;">
+      <div style="font-size:12px;font-weight:600;color:var(--c);margin-bottom:5px;">Tip</div>
+      <div style="font-size:13px;font-weight:400;color:var(--muted);line-height:1.7;">VCTR also learns from corrections automatically. Check Settings to see what it has picked up from your usage.</div>
+    </div>
+  </div>
+</div>
+
+<!-- PLATFORM GUIDE -->
+<div id="screen-resources" class="screen">
+  <div class="hdr"><div class="logo"><span class="arrow">→</span><span class="wordmark">VCTR</span></div><button class="icon-btn" onclick="goBack()">← Back</button></div>
+  <div class="legal-body">
+    <h2>Platform Guide</h2>
+    <div style="background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.22);border-radius:12px;padding:14px 15px;margin-bottom:22px;">
+      <div style="font-size:11px;font-weight:600;color:rgba(245,158,11,.9);letter-spacing:1px;margin-bottom:5px;">DISCLAIMER</div>
+      <div style="font-size:13px;font-weight:400;color:rgba(245,158,11,.75);line-height:1.7;">Based on the research we found, these are our recommended options. Recommendations are drawn from each platform's own published marketing, public benchmarks, and independent research. AI evolves quickly — verify directly with each platform for current capabilities. VCTR is independent and not affiliated with any platform listed.</div>
+    </div>
+    <div id="resources-list"></div>
   </div>
 </div>
 
@@ -867,3 +906,67 @@ window.addEventListener('DOMContentLoaded',()=>{
 </script>
 </body>
 </html>
+<script>
+const GUIDE=[
+  {id:'claude',name:'Claude',by:'Anthropic',color:'#FF6B35',tagline:'Advanced reasoning, writing, and coding',best:['Complex software engineering and debugging','Long-form writing, editing, and document analysis','Nuanced reasoning and multi-step research','Safe, reliable AI for sensitive or high-stakes tasks','Code review and explanation across all languages'],avoid:'Real-time data or live web results — it has a knowledge cutoff.',src:'Anthropic.com benchmarks (SWE-Bench, MMLU), Anthropic published positioning'},
+  {id:'chatgpt',name:'ChatGPT',by:'OpenAI',color:'#00D4AA',tagline:'Versatile general-purpose AI with the broadest reach',best:['Marketing copy, ad variations, and brand messaging','Creative writing, brainstorming, and ideation','Image generation via DALL-E (GPT-4o)','Data analysis and chart generation (Code Interpreter)','Customer-facing content and professional communication'],avoid:'Deep cited research — it can hallucinate sources. Use Perplexity for citations.',src:'OpenAI.com product pages, ChatGPT usage surveys 2024-2025'},
+  {id:'gemini',name:'Gemini',by:'Google',color:'#4B9EFF',tagline:'Google-native AI with real-time search built in',best:['Searches needing real-time or current information','Google Workspace tasks — Docs, Sheets, Gmail, Drive','Shopping comparisons and local recommendations','Multimodal tasks — images, audio, and video understanding','Travel, maps, and location-based questions'],avoid:'Highly nuanced writing or complex code — Claude or ChatGPT typically outperform here.',src:'Google DeepMind product pages, Google I/O announcements, Workspace AI documentation'},
+  {id:'perplexity',name:'Perplexity',by:'Perplexity AI',color:'#20B2AA',tagline:'Research-grade answers with real citations',best:['Academic research requiring cited, verifiable sources','Fact-checking and claim verification','Competitor and market research with sources','Current news and recent events with links','Technical questions requiring sourced documentation'],avoid:'Creative work, long-form writing, or code generation — not what it is built for.',src:'Perplexity.ai product positioning, independent AI research tool comparisons 2024-2025'},
+  {id:'metaai',name:'Meta AI',by:'Meta',color:'#0082FB',tagline:'Social-native AI built into Meta platforms',best:['Tasks within Instagram, Facebook, WhatsApp, and Messenger','Image generation with Imagine (built in)','Quick casual questions and everyday assistance','Social media caption and content ideas','Accessible AI for non-technical audiences'],avoid:'Professional or sensitive tasks — review Meta privacy policies before use.',src:'Meta AI product announcements, Meta.ai positioning, Meta Connect 2024'},
+  {id:'grok',name:'Grok',by:'xAI',color:'#E8E8E8',tagline:'Real-time X data with an unfiltered perspective',best:['Real-time trends and conversations from X','Current events as they happen on social media','Direct analysis without heavy content restrictions','Research on public figures and trending topics','Quick takes on breaking news'],avoid:'Long-form professional content or anything requiring neutral, careful framing.',src:'xAI.com product pages, Grok feature announcements, independent reviews 2024-2025'},
+  {id:'notion',name:'Notion AI',by:'Notion',color:'#C8C8C8',tagline:'AI that lives inside your notes and projects',best:['Summarizing and organizing meeting notes','Building and maintaining a connected knowledge base','Project planning, task management, and to-do lists','Drafting documents that live with your other notes','Searching across your existing Notion content'],avoid:'Standalone AI questions unrelated to your notes — other tools handle those better.',src:'Notion.so/product/ai, Notion AI documentation, Notion changelog 2024-2025'},
+  {id:'calendar',name:'Google Calendar',by:'Google',color:'#F59E0B',tagline:'Direct scheduling — no AI middleman needed',best:['Creating and managing calendar events directly','Setting reminders and recurring events','Sharing availability and scheduling meetings','Time blocking and weekly planning'],avoid:'Routing scheduling tasks through a chatbot when Calendar handles it directly and faster.',src:'Google Workspace product documentation'},
+  {id:'gmail',name:'Gmail',by:'Google',color:'#EA4335',tagline:'AI-assisted email inside your actual inbox',best:['Drafting professional emails with full thread context','Responding to emails with Smart Compose and Smart Reply','Summarizing long email threads','Writing cold outreach and follow-up sequences'],avoid:'Drafting emails in a separate AI tool and copy-pasting — Gmail AI has your full thread context.',src:'Google Workspace documentation, Gmail AI feature announcements 2024-2025'},
+];
+
+const RULE_CATS=[
+  {key:'coding',emoji:'💻',label:'Code & App Building'},
+  {key:'brand',emoji:'📣',label:'Brand & Marketing Copy'},
+  {key:'creative',emoji:'✍️',label:'Creative Writing & Ideas'},
+  {key:'research',emoji:'🔍',label:'Research & Fact-Finding'},
+  {key:'notes',emoji:'📋',label:'Notes & Tasks'},
+  {key:'schedule',emoji:'📅',label:'Scheduling'},
+  {key:'email',emoji:'✉️',label:'Professional Email'},
+  {key:'search',emoji:'🔎',label:'Search & Shopping'},
+];
+
+let editingCat=null;
+
+function renderRulesList(){
+  const list=document.getElementById('rules-list');if(!list)return;list.innerHTML='';
+  RULE_CATS.forEach(cat=>{
+    const pid=cfg.rules[cat.key]||'gemini';const pl=P(pid);
+    const row=document.createElement('div');
+    row.style.cssText='display:flex;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--border);border-radius:13px;padding:14px 16px;margin-bottom:8px;cursor:pointer;min-height:64px;gap:12px;';
+    row.innerHTML=`<div style="display:flex;align-items:center;gap:12px;flex:1;min-width:0;"><span style="font-size:20px;flex-shrink:0;">${cat.emoji}</span><div style="min-width:0;"><div style="font-size:14px;font-weight:700;margin-bottom:2px;">${cat.label}</div><div style="font-size:12px;font-weight:400;color:var(--muted);">→ <span style="color:${pl?.color||'var(--c)'};font-weight:600;">${pl?.name||pid}</span></div></div></div><div style="width:36px;height:36px;border-radius:10px;background:${pl?.color||'var(--c)'}22;border:1px solid ${pl?.color||'var(--c)'}44;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:${pl?.color||'var(--c)'};flex-shrink:0;">${pl?.name?.[0]||'?'}</div>`;
+    row.onclick=()=>openRulesPicker(cat);list.appendChild(row);
+  });
+}
+
+function openRulesPicker(cat){
+  editingCat=cat;
+  document.getElementById('rules-picker-label').textContent=cat.emoji+' '+cat.label.toUpperCase();
+  const grid=document.getElementById('rules-picker-grid');grid.innerHTML='';
+  PLATS.forEach(pl=>{
+    const sel=cfg.rules[cat.key]===pl.id;
+    const btn=document.createElement('button');
+    btn.style.cssText=`display:flex;flex-direction:column;align-items:center;gap:6px;border-radius:12px;padding:12px 8px;border:1.5px solid ${sel?pl.color:pl.color+'33'};background:${sel?pl.color+'22':'var(--card)'};min-height:72px;font-family:var(--mono);`;
+    btn.innerHTML=`<div style="width:30px;height:30px;border-radius:9px;background:${pl.color}22;border:1px solid ${pl.color}44;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:${pl.color};">${pl.name[0]}</div><span style="font-size:10px;font-weight:600;color:${sel?pl.color:'var(--muted)'};text-align:center;line-height:1.3;">${pl.name}</span>`;
+    btn.onclick=()=>{cfg.rules[cat.key]=pl.id;saveCfg();closeRulesPicker();renderRulesList();};
+    grid.appendChild(btn);
+  });
+  document.getElementById('rules-picker').style.display='block';
+}
+
+function closeRulesPicker(){document.getElementById('rules-picker').style.display='none';editingCat=null;}
+
+function renderResources(){
+  const list=document.getElementById('resources-list');if(!list)return;list.innerHTML='';
+  GUIDE.forEach(g=>{
+    const div=document.createElement('div');
+    div.style.cssText=`background:var(--card);border:1px solid ${g.color}22;border-radius:16px;padding:18px 16px;margin-bottom:14px;`;
+    div.innerHTML=`<div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;"><div style="width:42px;height:42px;border-radius:12px;background:${g.color}18;border:1px solid ${g.color}44;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:${g.color};flex-shrink:0;">${g.name[0]}</div><div><div style="font-size:17px;font-weight:800;color:${g.color};">${g.name}</div><div style="font-size:11px;font-weight:500;color:var(--dim);">by ${g.by}</div></div></div><div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:12px;line-height:1.5;">${g.tagline}</div><div style="font-size:11px;font-weight:600;color:var(--c);letter-spacing:1px;margin-bottom:8px;">BEST FOR</div>${g.best.map(b=>`<div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:7px;"><div style="width:5px;height:5px;border-radius:50%;background:${g.color};flex-shrink:0;margin-top:6px;"></div><div style="font-size:13px;font-weight:400;color:var(--muted);line-height:1.6;">${b}</div></div>`).join('')}<div style="margin-top:12px;background:rgba(255,255,255,.03);border-radius:10px;padding:11px 13px;"><div style="font-size:10px;font-weight:600;color:rgba(255,100,100,.7);letter-spacing:1px;margin-bottom:5px;">WATCH OUT</div><div style="font-size:12px;font-weight:400;color:rgba(255,255,255,.45);line-height:1.6;">${g.avoid}</div></div><div style="margin-top:10px;font-size:10px;font-weight:400;color:rgba(255,255,255,.2);line-height:1.5;">Source: ${g.src}</div>`;
+    list.appendChild(div);
+  });
+}
+</script>
