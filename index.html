@@ -498,15 +498,15 @@ input[type=password],input[type=text],input[type=url],input[type=email]{width:10
 </div>
 <script>
 const PLATS=[
-  {id:'claude',    name:'Claude',         color:'#FF6B35',url:t=>`https://claude.ai/new?q=${E(t)}`},
-  {id:'chatgpt',   name:'ChatGPT',        color:'#00D4AA',url:t=>`https://chat.openai.com/?q=${E(t)}`},
-  {id:'gemini',    name:'Gemini',         color:'#4B9EFF',url:t=>`https://gemini.google.com/app?q=${E(t)}`},
-  {id:'perplexity',name:'Perplexity',     color:'#20B2AA',url:t=>`https://www.perplexity.ai/search?q=${E(t)}`},
-  {id:'metaai',    name:'Meta AI',        color:'#0082FB',url:t=>`https://www.meta.ai/?q=${E(t)}`},
-  {id:'grok',      name:'Grok',           color:'#E8E8E8',url:t=>`https://grok.com/?q=${E(t)}`},
-  {id:'notion',    name:'Notion',         color:'#C8C8C8',url:t=>`https://www.notion.so/new?content=${E(t)}`},
-  {id:'calendar',  name:'Google Calendar',color:'#F59E0B',url:t=>`https://calendar.google.com/calendar/r/eventedit?text=${E(t)}`},
-  {id:'gmail',     name:'Gmail',          color:'#EA4335',url:t=>`https://mail.google.com/mail/?view=cm&su=${E(t)}`},
+  {id:'claude',    name:'Claude',         color:'#FF6B35',home:'https://claude.ai/',                        url:t=>`https://claude.ai/new?q=${E(t)}`},
+  {id:'chatgpt',   name:'ChatGPT',        color:'#00D4AA',home:'https://chat.openai.com/',                  url:t=>`https://chat.openai.com/?q=${E(t)}`},
+  {id:'gemini',    name:'Gemini',         color:'#4B9EFF',home:'https://gemini.google.com/app',             url:t=>`https://gemini.google.com/app?q=${E(t)}`},
+  {id:'perplexity',name:'Perplexity',     color:'#20B2AA',home:'https://www.perplexity.ai/',                url:t=>`https://www.perplexity.ai/search?q=${E(t)}`},
+  {id:'metaai',    name:'Meta AI',        color:'#0082FB',home:'https://www.meta.ai/',                      url:t=>`https://www.meta.ai/?q=${E(t)}`},
+  {id:'grok',      name:'Grok',           color:'#E8E8E8',home:'https://grok.com/',                         url:t=>`https://grok.com/?q=${E(t)}`},
+  {id:'notion',    name:'Notion',         color:'#C8C8C8',home:'https://www.notion.so/',                    url:t=>`https://www.notion.so/new?content=${E(t)}`},
+  {id:'calendar',  name:'Google Calendar',color:'#F59E0B',home:'https://calendar.google.com/calendar/r',    url:t=>`https://calendar.google.com/calendar/r/eventedit?text=${E(t)}`},
+  {id:'gmail',     name:'Gmail',          color:'#EA4335',home:'https://mail.google.com/mail/',              url:t=>`https://mail.google.com/mail/?view=cm&su=${E(t)}`},
 ];
 const E=t=>encodeURIComponent(t);
 const P=id=>PLATS.find(p=>p.id===id);
@@ -638,7 +638,7 @@ function delLearned(pid){delete cfg.learnedRoutes[pid];saveCfg();initSettings();
 function initMain(){
   document.getElementById('mode-badge').textContent=cfg.useOffline?'⚡ OFFLINE':(cfg.apiKey?'🟢 ONLINE':'🟡 OFFLINE');
   const strip=document.getElementById('strip');strip.innerHTML='';
-  PLATS.filter(p=>cfg.platforms.includes(p.id)).forEach(p=>{const d=document.createElement('button');d.className='pip';d.title=`Open ${p.name}`;d.style.cssText='background:none;border:none;cursor:pointer;touch-action:manipulation;padding:2px 0;';d.innerHTML=`<div class="pip-dot" style="background:${p.color};box-shadow:0 0 4px ${p.color}88;"></div><span class="pip-name">${p.name.toUpperCase()}</span>`;d.onclick=()=>window.open(p.url(''),p.id);strip.appendChild(d);});
+  PLATS.filter(p=>cfg.platforms.includes(p.id)).forEach(p=>{const d=document.createElement('button');d.className='pip';d.title=`Open ${p.name}`;d.style.cssText='background:none;border:none;cursor:pointer;touch-action:manipulation;padding:2px 0;';d.innerHTML=`<div class="pip-dot" style="background:${p.color};box-shadow:0 0 4px ${p.color}88;"></div><span class="pip-name">${p.name.toUpperCase()}</span>`;d.onclick=()=>window.open(p.home||p.url(''),p.id);strip.appendChild(d);});
   setMode('voice');
 }
 function showScreen(name){
@@ -698,19 +698,18 @@ function renderHistory() {
         <div class="hist-prompt">${entry.prompt.length > 50 ? entry.prompt.slice(0,50)+'…' : entry.prompt}</div>
       </div>
       <div class="hist-time">${timeAgo(entry.ts)}</div>
-      <button class="hist-reopen" title="Open again">↗</button>
+      <button class="hist-reopen" title="Go to ${pl.name}">↗</button>
     `;
-    // Tap anywhere → route same prompt again
+    // ↗ → open platform HOME so user lands in their active conversation
     div.querySelector('.hist-reopen').onclick = (e) => {
       e.stopPropagation();
-      window.open(pl.url(entry.prompt), '_blank');
-      navigator.clipboard?.writeText(entry.prompt).catch(()=>{});
+      window.open(pl.home || pl.url(''), '_blank');
     };
+    // Tap card → pre-fill input so user can choose to re-route or edit
     div.onclick = () => {
-      // Re-route the prompt through VCTR again
       const textarea = document.getElementById('input');
       if (textarea) { textarea.value = entry.prompt; setMode('keyboard'); }
-      route(entry.prompt);
+      window.scrollTo(0,0);
     };
     container.appendChild(div);
   });
