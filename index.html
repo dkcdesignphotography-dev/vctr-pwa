@@ -993,6 +993,8 @@ const RULE_CATS=[
 ];
 
 let editingCat=null;
+let sheetMode='rules'; // 'rules' | 'reroute'
+let rerouteItemPrompt='';
 
 function renderRulesList(){
   const list=document.getElementById('rules-list');if(!list)return;list.innerHTML='';
@@ -1022,10 +1024,38 @@ function openRulesPicker(cat){
   document.getElementById('rules-sheet').classList.add('open');
 }
 
+function openRerouteSheet(prompt){
+  rerouteItemPrompt=prompt;
+  sheetMode='reroute';
+  document.getElementById('sheet-title').textContent='SEND TO A DIFFERENT AI';
+  const grid=document.getElementById('rules-picker-grid');grid.innerHTML='';
+  PLATS.forEach(pl=>{
+    const btn=document.createElement('button');
+    btn.className='sheet-btn';
+    btn.style.cssText=`border-color:${pl.color}33;background:var(--card);`;
+    btn.innerHTML=`<div style="width:38px;height:38px;border-radius:11px;background:${pl.color}18;border:1px solid ${pl.color}44;display:flex;align-items:center;justify-content:center;">${platLogo(pl,22)}</div><span style="font-size:11px;font-weight:500;color:var(--muted);text-align:center;line-height:1.3;">${pl.name}</span>`;
+    btn.onclick=()=>{
+      window.open(pl.url(rerouteItemPrompt),'_blank');
+      navigator.clipboard?.writeText(rerouteItemPrompt).catch(()=>{});
+      if(cfg.learningEnabled){
+        const kws=keywords(rerouteItemPrompt);
+        if(kws.length){const lr=cfg.learnedRoutes||{};lr[pl.id]=[...new Set([...(lr[pl.id]||[]),...kws])];cfg.learnedRoutes=lr;saveCfg();showLearnedToast(kws.slice(0,3),pl.name);}
+      }
+      saveToHistory(pl.id,rerouteItemPrompt);
+      closeRulesPicker();
+    };
+    grid.appendChild(btn);
+  });
+  document.getElementById('sheet-overlay').classList.add('open');
+  document.getElementById('rules-sheet').classList.add('open');
+}
+
 function closeRulesPicker(){
   document.getElementById('sheet-overlay').classList.remove('open');
   document.getElementById('rules-sheet').classList.remove('open');
   editingCat=null;
+  sheetMode='rules';
+  rerouteItemPrompt='';
 }
 
 function renderResources(){
